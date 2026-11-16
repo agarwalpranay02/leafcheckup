@@ -6,6 +6,7 @@ import { headers } from "next/headers";
 import { Link } from "@/i18n/navigation";
 import { bySlug, CONDITIONS, CROPS, t as tr } from "@/lib/diseases";
 import { SITE } from "@/lib/site";
+import { share } from "@/lib/seo";
 
 export function generateStaticParams() {
   return CONDITIONS.map((c) => ({ slug: c.slug }));
@@ -16,12 +17,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const c = bySlug[slug];
   if (!c) return {};
   const title = `${tr(c.name, locale)} (${tr(CROPS[c.crop], locale)})`;
-  return {
+  return share({
     title,
     description: tr(c.summary, locale),
     alternates: { canonical: `/diseases/${slug}` },
-    openGraph: { title, description: tr(c.summary, locale), images: [{ url: c.sample }] },
-  };
+    openGraph: { images: [{ url: c.sample, alt: title }] },
+  });
 }
 
 export default async function Disease({ params }: { params: Promise<{ locale: string; slug: string }> }) {

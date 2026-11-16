@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import { PageHeader } from "@/components/PageHeader";
 import { SITE } from "@/lib/site";
+import { share } from "@/lib/seo";
 
 const UPDATED = "16 November 2026";
 
@@ -114,7 +115,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ doc: string }> }): Promise<Metadata> {
   const { doc } = await params;
-  return DOCS[doc] ? { title: DOCS[doc].title } : {};
+  return DOCS[doc] ? share({ title: DOCS[doc].title }) : {};
 }
 
 export default async function Legal({ params }: { params: Promise<{ locale: string; doc: string }> }) {

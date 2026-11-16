@@ -4,11 +4,12 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
 import { Link } from "@/i18n/navigation";
 import { CONDITIONS, CROP_IDS, CROPS, t as tr } from "@/lib/diseases";
+import { share } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "diseases" });
-  return { title: t("title"), description: t("sub"), alternates: { canonical: "/diseases" } };
+  return share({ title: t("title"), description: t("sub"), alternates: { canonical: "/diseases" } });
 }
 
 export default async function Diseases({ params }: { params: Promise<{ locale: string }> }) {

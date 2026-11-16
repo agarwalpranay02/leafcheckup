@@ -4,11 +4,12 @@ import { PageHeader } from "@/components/PageHeader";
 import { Link } from "@/i18n/navigation";
 import { getModelFacts } from "@/lib/model/server";
 import { RESEARCH } from "@/lib/site";
+import { share } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "research" });
-  return { title: t("title"), description: t("sub"), alternates: { canonical: "/research" } };
+  return share({ title: t("title"), description: t("sub"), alternates: { canonical: "/research" } });
 }
 
 const pct = (x: number) => `${(x * 100).toFixed(1)}%`;

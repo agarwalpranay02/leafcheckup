@@ -6,11 +6,12 @@ import { Playground } from "@/components/Playground";
 import { Link } from "@/i18n/navigation";
 import { MODEL_VERSION } from "@/lib/model/model-version";
 import { SITE } from "@/lib/site";
+import { share } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "dev" });
-  return { title: t("title"), description: t("sub"), alternates: { canonical: "/developers" } };
+  return share({ title: "Developer API", description: t("sub"), alternates: { canonical: "/developers" } });
 }
 
 const Code = ({ children }: { children: string }) => (

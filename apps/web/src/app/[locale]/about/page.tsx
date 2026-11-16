@@ -6,12 +6,13 @@ import { PageHeader } from "@/components/PageHeader";
 import { Link } from "@/i18n/navigation";
 import { getModelFacts } from "@/lib/model/server";
 import { RESEARCH, SITE } from "@/lib/site";
+import { share } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = share({
   title: "About",
   description: "How LeafCheckup went from a field dataset in Rajasthan to a published model and a free, on-device diagnosis app.",
   alternates: { canonical: "/about" },
-};
+});
 
 const STACK: { area: string; items: string[] }[] = [
   { area: "Machine learning", items: ["PyTorch", "timm (EfficientNet-B0)", "Group-aware leak-free evaluation", "Temperature calibration", "Mahalanobis out-of-distribution detection", "Class activation maps", "ONNX export", "scikit-learn, XGBoost baselines"] },

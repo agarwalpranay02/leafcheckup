@@ -11,6 +11,7 @@ import { ServiceWorker } from "@/components/ServiceWorker";
 import { MobileTabBar } from "@/components/MobileTabBar";
 import { Toaster } from "@/components/Toaster";
 import { SITE } from "@/lib/site";
+import { SHARE_CARD } from "@/lib/seo";
 
 export const viewport: Viewport = {
   themeColor: [
@@ -40,8 +41,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       title: t("title"),
       description: t("description"),
       locale: "en_IN",
+      images: [SHARE_CARD],
     },
-    twitter: { card: "summary_large_image", title: t("title"), description: t("description") },
+    twitter: { card: "summary_large_image", title: t("title"), description: t("description"), images: [SHARE_CARD] },
     appleWebApp: { capable: true, title: SITE.name, statusBarStyle: "default" },
     formatDetection: { telephone: false },
     icons: { icon: "/icons/icon.svg", apple: "/icons/apple-touch-icon.png" },

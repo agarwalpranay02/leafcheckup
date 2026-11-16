@@ -2,11 +2,12 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
 import { History } from "@/components/History";
+import { share } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "history" });
-  return { title: t("title"), description: t("sub"), alternates: { canonical: "/history" }, robots: { index: false } };
+  return share({ title: t("title"), description: t("sub"), alternates: { canonical: "/history" }, robots: { index: false } });
 }
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {

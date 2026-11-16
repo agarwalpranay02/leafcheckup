@@ -2,11 +2,12 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
 import { Batch } from "@/components/Batch";
+import { share } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "batch" });
-  return { title: t("title"), description: t("sub"), alternates: { canonical: "/batch" } };
+  return share({ title: t("title"), description: t("sub"), alternates: { canonical: "/batch" } });
 }
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {

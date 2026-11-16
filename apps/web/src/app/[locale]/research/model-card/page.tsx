@@ -3,8 +3,9 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
 import { byId, CONDITIONS, COVERAGE, CROP_IDS, CROPS } from "@/lib/diseases";
 import { getModelFacts } from "@/lib/model/server";
+import { share } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Model card", description: "How LeafCheckup's leaf disease model was trained and evaluated, and where it fails." };
+export const metadata: Metadata = share({ title: "Model card", description: "How LeafCheckup's leaf disease model was trained and evaluated, and where it fails." });
 
 const pct = (x: number) => `${(x * 100).toFixed(1)}%`;
 
