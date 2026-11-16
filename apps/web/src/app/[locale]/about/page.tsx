@@ -89,8 +89,8 @@ export default async function About({ params }: { params: Promise<{ locale: stri
             {RESEARCH.papers.map((p) => (
               <li key={p.id} className="py-4"><p className="font-[600]">{p.url ? <a className="link" href={p.url} target="_blank" rel="noopener noreferrer">{p.title}</a> : p.title}</p><p className="muted t-small mt-1">{p.venue}</p></li>
             ))}
-            <li className="py-4"><p className="font-[600]">Registered design {RESEARCH.patent.number}, Government of India</p><p className="muted t-small mt-1">{RESEARCH.patent.title}. <a className="link" href={RESEARCH.patent.verifyUrl} target="_blank" rel="noopener noreferrer">Verify on IP India</a></p></li>
-            <li className="py-4"><p className="font-[600]">Featured in Punjab Kesari, Jaipur, 10 October 2025</p></li>
+            <li className="py-4"><p className="font-[600]">Registered design {RESEARCH.patent.number}, Government of India</p><p className="muted t-small mt-1">{RESEARCH.patent.title}. <a className="link" href={RESEARCH.patent.certificateUrl} target="_blank" rel="noopener noreferrer">View certificate</a></p></li>
+            <li className="py-4"><p className="font-[600]">Featured in Punjab Kesari, Jaipur, 10 October 2025</p><p className="muted t-small mt-1"><a className="link" href={RESEARCH.press[0].url} target="_blank" rel="noopener noreferrer">Read the article</a></p></li>
             <li className="py-4"><p className="font-[600]">Two open datasets, {(RESEARCH.datasets[0].originals + RESEARCH.datasets[1].originals).toLocaleString("en-IN")} original field photos</p><p className="muted t-small mt-1"><a className="link" href={RESEARCH.datasets[0].url} target="_blank" rel="noopener noreferrer">IEEE DataPort</a> and <a className="link" href={RESEARCH.datasets[1].url} target="_blank" rel="noopener noreferrer">Mendeley Data</a></p></li>
           </ul>
         </section>

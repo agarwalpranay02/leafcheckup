@@ -23,7 +23,9 @@ const schema = z.object({
   TRUST_PROXY: z.enum(["0", "1"]).default("1"),
 });
 
-const parsed = schema.safeParse(process.env);
+// A blank line in .env (e.g. "BETTER_AUTH_SECRET=") means "not set", not an empty value
+const raw = Object.fromEntries(Object.entries(process.env).filter(([, v]) => v !== undefined && v.trim() !== ""));
+const parsed = schema.safeParse(raw);
 if (!parsed.success) {
   throw new Error("Invalid environment: " + JSON.stringify(parsed.error.flatten().fieldErrors));
 }

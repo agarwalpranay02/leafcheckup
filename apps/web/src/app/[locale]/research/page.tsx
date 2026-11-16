@@ -14,6 +14,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 const pct = (x: number) => `${(x * 100).toFixed(1)}%`;
 
+const longDate = (iso: string) =>
+  new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+
 export default async function Research({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
@@ -109,9 +112,9 @@ export default async function Research({ params }: { params: Promise<{ locale: s
             <h2 id="patent" className="display t-h2">{t("patent")}</h2>
             <p className="num display mt-6 text-[3.4rem] leading-none text-[var(--color-leaf)]">{RESEARCH.patent.number}</p>
             <p className="title mt-4 text-xl prose-measure">{RESEARCH.patent.title}</p>
-            <p className="mt-2 text-[var(--muted)]">{RESEARCH.patent.office} · {RESEARCH.patent.klass} · registered {RESEARCH.patent.filed}, certified {RESEARCH.patent.certified}</p>
-            <p className="mt-4"><a className="btn btn-ghost min-h-10 px-4 text-sm" href={RESEARCH.patent.verifyUrl} target="_blank" rel="noopener noreferrer">Verify on IP India</a></p>
-            <p className="mt-2 text-sm text-[var(--muted)]">On the Government of India public design search, enter design number {RESEARCH.patent.number}.</p>
+            <p className="mt-2 text-[var(--muted)]">{RESEARCH.patent.office} · {RESEARCH.patent.klass} · registered {longDate(RESEARCH.patent.filed)}, certificate issued {longDate(RESEARCH.patent.certified)}</p>
+            <p className="mt-6"><a className="btn btn-leaf min-h-10 px-4 text-sm" href={RESEARCH.patent.certificateUrl} target="_blank" rel="noopener noreferrer">View registration certificate</a></p>
+            <p className="mt-2 text-sm text-[var(--muted)]">The official Certificate of Registration issued by the Patent Office, Government of India.</p>
           </div>
           <div aria-labelledby="press">
             <h2 id="press" className="display t-h2">{t("press")}</h2>
@@ -119,6 +122,7 @@ export default async function Research({ params }: { params: Promise<{ locale: s
               <blockquote className="title text-2xl">मोबाइल से होगी रोग की पहचान, किसान बचाएंगे फसल</blockquote>
               <figcaption className="mt-3 text-[var(--muted)]">Punjab Kesari, Jaipur, 10 October 2025. Report on the ridge gourd study, the real-time data collection device design and the farmer app.</figcaption>
             </figure>
+            <p className="mt-6"><a className="btn btn-ghost min-h-10 px-4 text-sm" href={RESEARCH.press[0].url} target="_blank" rel="noopener noreferrer">Read the article</a></p>
           </div>
         </section>
 

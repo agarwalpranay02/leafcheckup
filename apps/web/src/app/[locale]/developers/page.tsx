@@ -26,24 +26,27 @@ export default async function Developers({ params }: { params: Promise<{ locale:
   const response = JSON.stringify({
     model: MODEL_VERSION,
     supported: true,
-    prediction: { id: "ridge_gourd__leaf_miner", crop: "ridge_gourd", condition: "leaf_miner", confidence: 0.973 },
+    prediction: { id: "ridge_gourd__leaf_miner", crop: "ridge_gourd", condition: "leaf_miner", confidence: 0.9976 },
     probabilities: [
-      { id: "ridge_gourd__leaf_miner", p: 0.973 },
-      { id: "ridge_gourd__mosaic_virus", p: 0.018 },
-      { id: "ridge_gourd__healthy", p: 0.006 },
+      { id: "ridge_gourd__leaf_miner", p: 0.9976 },
+      { id: "ridge_gourd__mosaic_virus", p: 0.0013 },
+      { id: "ridge_gourd__healthy", p: 0.0004 },
+      { id: "brinjal__little_leaf", p: 0.0003 },
+      { id: "brinjal__healthy", p: 0.0002 },
+      { id: "brinjal__phomopsis_blight", p: 0.0002 },
     ],
-    ood: { score: -118.4, threshold: -203.0 },
-    quality: { blur: 412.7, brightness: 121.3, plant_cover: 0.71, issues: [] },
+    ood: { score: -65.64, threshold: -203.0 },
+    quality: { blur: 4014.1, brightness: 110.3, plant_cover: 0.553, issues: [] },
     guide_url: `${base}/diseases/ridge-gourd-leaf-miner`,
-    latency_ms: 74,
+    latency_ms: 463.6,
   }, null, 2);
   const errors = [
     ["400", "missing_image / bad_request", "No image in the request, or the body could not be read."],
     ["401", "invalid_api_key", "Missing, malformed, revoked or unknown key."],
     ["413", "too_large", "Image larger than 8 MB."],
-    ["415", "unsupported_image", "Not a JPEG, PNG or WebP (checked by file signature)."],
+    ["415", "unsupported_image / unsupported_media_type", "Not a JPEG, PNG or WebP (checked by file signature), or the body is not multipart/form-data, JSON or a raw image."],
     ["422", "undecodable_image", "The file could not be decoded as an image."],
-    ["429", "rate_limited / quota_exceeded", "Per-minute or monthly fair-use limit reached. Respect Retry-After."],
+    ["429", "rate_limited / quota_exceeded", "Per-minute limit reached (wait the Retry-After seconds), or the monthly fair-use limit is used up (it resets on the 1st)."],
     ["502", "inference_error", "The inference service failed on this image. Retrying rarely helps."],
     ["503", "inference_starting / inference_unavailable", "The free-tier inference server is waking up after a quiet period (retry after the Retry-After seconds), or is not configured."],
   ];
@@ -91,7 +94,7 @@ const { prediction, supported } = await res.json();`}</Code>
           <section>
             <h2 className="title text-3xl">{t("response")}</h2>
             <Code>{response}</Code>
-            <p className="mt-2 text-sm text-[var(--muted)]">When <code>supported</code> is false the photo did not look like a {COVERAGE.cropsOr} leaf; ignore the prediction.</p>
+            <p className="mt-2 text-sm text-[var(--muted)]"><code>probabilities</code> lists every class, highest first. When <code>supported</code> is false the photo did not look like a {COVERAGE.cropsOr} leaf; ignore the prediction. <code>quality.issues</code> can contain <code>blurry</code>, <code>dark</code>, <code>bright</code> or <code>no_leaf</code>; retake the photo if it is not empty. <code>guide_url</code> links to the field guide page for the predicted condition, and <code>latency_ms</code> is the time the model took on the server.</p>
           </section>
           <section>
             <h2 className="title text-3xl">{t("limits")}</h2>

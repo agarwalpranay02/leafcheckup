@@ -20,16 +20,16 @@
   <a href="https://github.com/agarwalpranay02/leafcheckup/actions/workflows/ci.yml"><img src="https://github.com/agarwalpranay02/leafcheckup/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
   <a href="https://github.com/agarwalpranay02/leafcheckup/actions/workflows/security.yml"><img src="https://github.com/agarwalpranay02/leafcheckup/actions/workflows/security.yml/badge.svg" alt="Security" /></a>
   <img src="https://img.shields.io/badge/accuracy-94.9%25%20on%20unseen%20leaves-2d5a45" alt="Accuracy 94.9% on unseen leaves" />
-  <img src="https://img.shields.io/badge/inference-~120%20ms%20on--device-2d5a45" alt="About 120 ms on-device" />
+  <img src="https://img.shields.io/badge/AI-runs%20on%20the%20device-2d5a45" alt="AI runs on the device" />
 </p>
 
 <p align="center">
   <img src="docs/screenshots/home.jpg" alt="LeafCheckup home page with a live diagnosis of a field photo" width="880" />
 </p>
 
-A farmer photographs a leaf, or points the phone's camera at it, and in about a tenth of a second LeafCheckup says whether it is healthy or which disease it has. It also shows how confident it is, highlights where it looked, and explains what to do next. The neural network runs inside the browser, so photos never leave the phone and it keeps working without signal once the site has been opened.
+A farmer photographs a leaf, or points the phone's camera at it, and in under a second LeafCheckup says whether it is healthy or which disease it has. It also shows how confident it is, highlights where it looked, and explains what to do next. The neural network runs inside the browser, so photos are diagnosed on the phone without being uploaded, and it keeps working without signal once the site has been opened.
 
-It currently covers **ridge gourd** (healthy, leaf miner, yellow mosaic virus) and **brinjal** (healthy, little leaf, Phomopsis blight), trained on two field datasets photographed in Rajasthan, India. Anything else, from a hand to a tomato leaf, is recognised as "not a supported leaf" instead of being given a guess.
+It currently covers **ridge gourd** (healthy, leaf miner, yellow mosaic virus) and **brinjal** (healthy, little leaf, Phomopsis blight), trained on two field datasets photographed in Rajasthan, India. Photos of anything else are flagged as "not a supported leaf" instead of being given a guess; the detector catches 89.5% of non-leaf test images.
 
 ## Results
 
@@ -40,9 +40,9 @@ Every number comes from leaves the model never saw during training. Many plant d
 | Test accuracy (217 unseen leaves, 6 classes) | **94.9%** (95% bootstrap CI 91.7–97.7%) |
 | Macro-F1 | 0.942 |
 | Calibration error (ECE, after temperature scaling) | 1.8% |
-| "Not a leaf" detection | AUROC 0.993; rejects 89.5% of 172 non-leaf test images and keeps 98.6% of real leaves |
+| "Not a leaf" detection | AUROC 0.993; rejects 89.5% of 172 synthetic non-leaf test images and keeps 98.6% of real leaves |
 | Browser model vs. PyTorch | identical test accuracy; max output difference 4.5 × 10⁻⁵ |
-| Speed | about 120 ms per photo on a laptop CPU, in the browser |
+| Speed | about 45 ms for the model per photo on a laptop CPU in the browser (WebAssembly, 4 threads); the answer appears in under a second |
 
 **Against the published baseline.** The original DenseNet121 + XGBoost pipeline (MIND 2025) reported 92%. Under its original protocol every test leaf also appeared in training as an augmented copy (545 of 545). Re-run on a leak-free split it scores 92.0% on 88 held-out ridge gourd leaves. **LeafCheckup scores 98.9% on the same 88 leaves.** The full benchmark, confusion matrix and per-class results are on the [model card](https://leafcheckup.vercel.app/research/model-card).
 
@@ -61,7 +61,7 @@ Every number comes from leaves the model never saw during training. Many plant d
 - **Tells you what to do.** Each condition has a field guide (symptoms, look-alikes, integrated pest management steps) with sources from agricultural universities and ICAR.
 - **Field tools.** Batch scan up to 200 photos (WebGPU when available) with CSV and PDF export, field surveys with disease incidence per plot, a 7-day weather risk outlook, a spray mix calculator and on-device scan history.
 - **Works like an app.** Installable PWA, works offline, accepts photos shared from WhatsApp or the gallery (Web Share Target), keeps the screen awake during surveys, reads results aloud.
-- **Free developer API.** Sign in with Google or an email link, create a key, and call `POST /api/v1/diagnose`. Keys are hashed, and every key has fair-use rate limits and monthly quotas.
+- **Free developer API.** Sign in with Google, create a key, and call `POST /api/v1/diagnose`. Keys are hashed, and every key has fair-use rate limits and monthly quotas.
 
 <p align="center">
   <img src="docs/screenshots/mobile-home.jpg" alt="LeafCheckup on a phone" width="280" />
@@ -85,7 +85,7 @@ Every number comes from leaves the model never saw during training. Many plant d
 | **Frontend** | Next.js 16 (App Router, Turbopack, React Server Components), React 19.3 (View Transitions), TypeScript, Tailwind CSS 4, next-intl, Motion, Anek Latin variable font |
 | **On-device AI** | ONNX Runtime Web 1.31 in a module Web Worker, multi-threaded WebAssembly via cross-origin isolation, WebGPU, OffscreenCanvas, createImageBitmap |
 | **Browser platform** | getUserMedia live camera with torch control, installable PWA with an offline service worker, Web Share Target, Screen Wake Lock, Speech Synthesis, Vibration, IndexedDB (idb-keyval), Clipboard paste and drag-and-drop |
-| **Backend** | Next.js route handlers, better-auth (Google OAuth, email magic links), Drizzle ORM, PostgreSQL (Neon in production, PGlite locally), Zod validation, Resend email, rate limiting (in-memory or Upstash) |
+| **Backend** | Next.js route handlers, better-auth (Google OAuth; email magic links switch on once a sending domain is verified), Drizzle ORM, PostgreSQL (Neon in production, PGlite locally), Zod validation, Resend email, rate limiting (in-memory or Upstash) |
 | **Inference API** | FastAPI, Uvicorn, ONNX Runtime, NumPy, Pillow, Prometheus metrics |
 | **Security** | Strict nonce-based Content-Security-Policy with `strict-dynamic`, HSTS, COOP/COEP/CORP, same-origin CSRF guard, hashed and peppered API keys, upload validation, Permissions-Policy, private vulnerability disclosure policy |
 | **Observability** | OpenTelemetry tracing (@vercel/otel), Prometheus metrics on the inference service, structured health checks |
@@ -98,9 +98,8 @@ Every number comes from leaves the model never saw during training. Many plant d
 - **Paper:** [*A Hybrid Deep Learning Approach for Automated Plant Disease Diagnosis in Indian Ridge Gourd: Dataset Creation and Real-World Application*](https://doi.org/10.1007/978-3-032-31233-4_7). MIND 2025, MNIT Jaipur; Springer *Communications in Computer and Information Science*, vol. 2980, pp. 83–94, 2026. Built a 600-photo field dataset from farms near Jaipur and reached 92.0% with a DenseNet121 + XGBoost hybrid.
 - **Review:** [*A comprehensive review and bibliometric analysis of deep learning applications in plant disease detection*](https://doi.org/10.1007/s44163-026-02310-z). *Discover Artificial Intelligence* 6, 1459 (Springer Nature, 2026, open access).
 - **Datasets:** ridge gourd leaf dataset on [IEEE DataPort](https://doi.org/10.21227/469z-vm04) and brinjal leaf dataset on [Mendeley Data](https://doi.org/10.17632/c39p3k87g2.1).
-- **Registered design:** No. 476293-001, Government of India (Designs Act 2000, class 14-02): an IoT device for real-time data collection and augmentation of plant samples. Verifiable on the [IP India public design search](https://search.ipindia.gov.in/designsearch).
-- **Design registration:** Government of India design no. 476293-001 for the field data-collection device.
-- **Press:** the ridge gourd work was covered by *Punjab Kesari*.
+- **Registered design:** No. 476293-001, Government of India (Designs Act 2000, class 14-02): an IoT device for real-time data collection and augmentation of plant samples. [View the registration certificate](https://drive.google.com/file/d/1fnbNIrKeal7NGtuPIZunkuAs7jU-0VHw/view?usp=sharing).
+- **Press:** the ridge gourd work was covered by *Punjab Kesari*, Jaipur, 10 October 2025. [Read the article](https://drive.google.com/file/d/18E9B6SJ9ubYkws0eT9Z8jRuzZ3ren0bo/view?usp=sharing).
 
 ## Repository
 
@@ -120,7 +119,7 @@ infra/                 Self-hosted deployment: Compose, Caddy, backups, server h
 ```bash
 cd apps/web
 npm install
-cp .env.example .env.local    # works as is: embedded Postgres, emails printed to the console
+cp .env.example .env.local    # works as is: embedded Postgres (PGlite), emails printed to the console
 npm run dev                   # http://localhost:3000
 ```
 
@@ -133,7 +132,7 @@ Optional API service: `cd services/inference && pip install -r requirements-dev.
 - [FREE_HOSTING.md](FREE_HOSTING.md): put it online at no cost on Vercel, Neon and Render
 - [DEPLOY.md](DEPLOY.md): run it on your own server behind Cloudflare
 - [ADDING_A_CROP.md](ADDING_A_CROP.md): add a new crop from a labelled dataset
-- [ml/README.md](ml/README.md): reproduce the model (about 25 minutes on a 2-core CPU)
+- [ml/README.md](ml/README.md): reproduce the model from the published datasets
 
 ## Licence
 

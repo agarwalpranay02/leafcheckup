@@ -326,7 +326,7 @@
     "request": "Request",
     "response": "Response",
     "limits": "Limits",
-    "limitsBody": "Free for everyone. Images up to 8 MB (JPEG, PNG or WebP), 30 requests a minute and 5,000 a month per key. Responses include X-RateLimit-Remaining.",
+    "limitsBody": "Free for everyone. Images up to 8 MB (JPEG, PNG or WebP), 30 requests a minute and 5,000 a month per key. Successful responses carry X-RateLimit-Limit, X-RateLimit-Remaining and X-RateLimit-Reset for the minute, and X-Quota-Used and X-Quota-Limit for the month. The API sends CORS headers, so it can be called straight from a web page.",
     "errors": "Errors",
     "playground": "Try it",
     "playgroundBody": "Paste a key and pick a photo to call the live API from your browser."
@@ -363,9 +363,12 @@
     "product": "Product",
     "company": "Research and company",
     "legal": "Legal",
-    "rights": "© {year} LeafCheckup. Model and app by Pranay Agarwal. Datasets © their authors under the licences stated on the research page.",
+    "rights": "© {year} LeafCheckup",
     "install": "Install app",
-    "offline": "Works offline"
+    "offline": "Works offline",
+    "credit": "Model and app by Pranay Agarwal",
+    "datasetsCredit": "Datasets © their authors, under the licences listed on the",
+    "datasetsLink": "Research page"
   },
   "common": {
     "back": "Back",

@@ -101,7 +101,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           <div>
             <h2 id="evidence" className="display t-h2">{t("evidenceTitle")}</h2>
             <p className="mt-4 t-lead muted prose-measure">{t("evidenceSub")}</p>
-            <p className="mt-6 text-[var(--muted)]">{t("pressLine")}</p>
+            <p className="mt-6 text-[var(--muted)]">{t("pressLine")} <a className="link" href={RESEARCH.press[0].url} target="_blank" rel="noopener noreferrer">Read the article</a></p>
             <Link href="/research" className="btn btn-leaf mt-8">{t("readResearch")}</Link>
           </div>
           <dl className="divide-y divide-[var(--rule)] border-y border-[var(--rule)]">

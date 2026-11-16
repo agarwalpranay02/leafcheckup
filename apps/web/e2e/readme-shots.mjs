@@ -12,7 +12,7 @@ await p.goto(B + "/diagnose", { waitUntil: "load" });
 await p.setInputFiles('input[type=file][accept^="image/jpeg"]', "public/samples/ridge_gourd__mosaic_virus.jpg");
 await p.waitForSelector("article h2", { timeout: 60000 }); await p.waitForTimeout(5500); // let the "saved" toast leave
 await shot(p, "result.jpg");
-await p.goto(B + "/diseases/phomopsis-blight", { waitUntil: "load" }); await p.waitForTimeout(800);
+await p.goto(B + "/diseases/brinjal-phomopsis-blight", { waitUntil: "load" }); await p.waitForTimeout(800);
 await shot(p, "field-guide.jpg");
 await p.goto(B + "/about", { waitUntil: "load" }); await p.waitForTimeout(600);
 const arch = p.locator("section", { hasText: "How it is built" }).first();
@@ -26,7 +26,8 @@ await shot(q, "mobile-home.jpg");
 await q.goto(B + "/diagnose", { waitUntil: "load" });
 await q.setInputFiles('input[type=file][accept^="image/jpeg"]', "public/samples/brinjal__little_leaf.jpg");
 await q.waitForSelector("article h2", { timeout: 60000 }); await q.waitForTimeout(5500);
-await q.evaluate(() => { const el = document.querySelector("main h1"); if (el) window.scrollTo(0, el.getBoundingClientRect().bottom + window.scrollY - 70); });
+// Put the photo just under the sticky header so the page title doesn't show through it
+await q.evaluate(() => { const el = document.querySelector("main img"); if (el) window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - 76); });
 await q.waitForTimeout(500);
 await shot(q, "mobile-result.jpg");
 await b.close();

@@ -60,8 +60,8 @@ export const RESEARCH = {
     title: "Internet of Things based device for real-time data collection and augmentation for plant and agricultural samples",
     filed: "2025-10-09",
     certified: "2026-01-06",
-    // The public register has no per-record link; visitors search the number there
-    verifyUrl: "https://search.ipindia.gov.in/designsearch",
+    // Scan of the Certificate of Registration issued by the Patent Office
+    certificateUrl: "https://drive.google.com/file/d/1fnbNIrKeal7NGtuPIZunkuAs7jU-0VHw/view?usp=sharing",
   },
-  press: [{ outlet: "Punjab Kesari", city: "Jaipur", date: "2025-10-10" }],
+  press: [{ outlet: "Punjab Kesari", city: "Jaipur", date: "2025-10-10", url: "https://drive.google.com/file/d/18E9B6SJ9ubYkws0eT9Z8jRuzZ3ren0bo/view?usp=sharing" }],
 } as const;

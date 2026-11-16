@@ -62,7 +62,14 @@ export async function SiteFooter() {
         ])}
       </div>
       <div className="border-t border-[var(--rule)]">
-        <p className="mx-auto max-w-7xl px-4 py-6 text-sm text-[var(--muted)] sm:px-6">{t("rights", { year: new Date().getFullYear() })}</p>
+        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-6 text-sm text-[var(--muted)] sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:gap-8">
+          <p className="font-[600] text-[var(--fg)]">{t("rights", { year: new Date().getFullYear() })}</p>
+          <p>{t("credit")}</p>
+          <p>
+            {t("datasetsCredit")}{" "}
+            <Link className="link" href="/research#datasets">{t("datasetsLink")}</Link>
+          </p>
+        </div>
       </div>
     </footer>
   );
