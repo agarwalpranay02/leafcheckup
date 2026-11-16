@@ -43,7 +43,8 @@ export default async function Developers({ params }: { params: Promise<{ locale:
     ["415", "unsupported_image", "Not a JPEG, PNG or WebP (checked by file signature)."],
     ["422", "undecodable_image", "The file could not be decoded as an image."],
     ["429", "rate_limited / quota_exceeded", "Per-minute or monthly fair-use limit reached. Respect Retry-After."],
-    ["503", "inference_unavailable", "Inference service down or not configured."],
+    ["502", "inference_error", "The inference service failed on this image. Retrying rarely helps."],
+    ["503", "inference_starting / inference_unavailable", "The free-tier inference server is waking up after a quiet period (retry after the Retry-After seconds), or is not configured."],
   ];
   return (
     <>

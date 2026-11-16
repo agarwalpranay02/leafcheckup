@@ -5,11 +5,13 @@ import { env } from "@/lib/server/env";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  let inference: "up" | "down" | "not_configured" = "not_configured";
+  let inference: "up" | "starting" | "down" | "not_configured" = "not_configured";
   if (env.INFERENCE_URL) {
     try {
+      // Also wakes a sleeping free-tier instance, so opening the API docs warms it up
       const r = await fetch(`${env.INFERENCE_URL}/healthz`, { cache: "no-store", signal: AbortSignal.timeout(2500) });
-      inference = r.ok ? "up" : "down";
+      const json = (r.headers.get("content-type") ?? "").includes("application/json");
+      inference = r.ok && json ? "up" : r.status === 503 || !json ? "starting" : "down";
     } catch {
       inference = "down";
     }

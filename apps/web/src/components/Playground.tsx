@@ -1,11 +1,13 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function Playground({ label, body }: { label: string; body: string }) {
   const [key, setKey] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [out, setOut] = useState<string>("");
   const [busy, setBusy] = useState(false);
+  // Wake the free-tier inference server while the visitor reads the docs
+  useEffect(() => { fetch("/api/v1/health", { cache: "no-store" }).catch(() => {}); }, []);
   return (
     <div className="rounded-[var(--radius-frame)] bg-[var(--surface)] p-6 ring-1 ring-[var(--rule)]">
       <p className="title text-2xl">{label}</p>
