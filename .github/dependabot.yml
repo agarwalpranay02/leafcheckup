@@ -11,6 +11,8 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
+      # @opentelemetry/resources accepts api <1.10 only; bump together once it does
+      - dependency-name: "@opentelemetry/api"
   - package-ecosystem: pip
     directory: /services/inference
     schedule: { interval: monthly }
