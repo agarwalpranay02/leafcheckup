@@ -1,0 +1,393 @@
+{
+  "meta": {
+    "title": "LeafCheckup: crop disease diagnosis from one leaf photo",
+    "description": "Free, private, offline diagnosis of {crops} leaf diseases. Take a photo; the AI runs on your phone. Built on peer-reviewed research.",
+    "tagline": "Point at a leaf. Know what's wrong."
+  },
+  "nav": {
+    "diagnose": "Diagnose",
+    "tools": "Tools",
+    "diseases": "Field guide",
+    "research": "Research",
+    "developers": "API",
+    "signIn": "Sign in",
+    "account": "Account",
+    "menu": "Menu",
+    "close": "Close",
+    "skip": "Skip to content",
+    "history": "My scans",
+    "modelCard": "Model card",
+    "about": "About"
+  },
+  "tools": {
+    "diagnose": {
+      "name": "Leaf diagnosis",
+      "desc": "One photo, an answer in seconds, with what to do next."
+    },
+    "batch": {
+      "name": "Batch scan",
+      "desc": "Drop up to 200 photos and get a table, a chart and a CSV."
+    },
+    "scout": {
+      "name": "Field survey",
+      "desc": "Walk the field, scan leaves as you go, get disease incidence per plot."
+    },
+    "risk": {
+      "name": "Weather risk",
+      "desc": "7-day outlook of conditions that favour whitefly, leaf miner and blight."
+    },
+    "calculator": {
+      "name": "Spray mix calculator",
+      "desc": "Turn a label dose into product per tank and tanks per acre."
+    },
+    "history": {
+      "name": "My scans",
+      "desc": "Every diagnosis, saved privately on this device. Export any time."
+    },
+    "report": {
+      "name": "Field report",
+      "desc": "A clean PDF to share with your agronomist or KVK."
+    },
+    "api": {
+      "name": "Developer API",
+      "desc": "Add LeafCheckup's model to your own app with one HTTPS call. Free."
+    }
+  },
+  "home": {
+    "title": "Point at a leaf. Know what's wrong.",
+    "sub": "LeafCheckup identifies {crops} leaf diseases from a single photo and tells you what to do about it. The AI runs on your phone, so it is free, private and works without internet.",
+    "crops": "Works today for {cropsLocal}.",
+    "conditionsTitle": "{ConditionCount} conditions it recognises",
+    "conditionsSub": "Each photo below is a real field image from the datasets the model was trained on, collected on farms in Rajasthan.",
+    "howTitle": "How it works",
+    "how": [
+      {
+        "t": "Photograph one leaf",
+        "d": "Fill the frame with a single leaf in daylight. Upload from the gallery or use the camera."
+      },
+      {
+        "t": "The model reads it on your device",
+        "d": "An EfficientNet network checks the leaf twice, mirrored and unmirrored, and highlights the area that drove its answer. Your photo never leaves the phone."
+      },
+      {
+        "t": "Act on the result",
+        "d": "You get the likely condition, how sure the model is, and field-tested steps to manage it. Save it, share it on WhatsApp or print a report."
+      }
+    ],
+    "evidenceTitle": "Built on published, peer-reviewed work",
+    "evidenceSub": "LeafCheckup comes out of research at BIT Mesra on diagnosing diseases of local Indian crops that large datasets ignore.",
+    "statAccuracy": "accuracy on leaves the model never saw",
+    "statAccuracyNote": "Leaf-level held-out test, {n} photos. 95% interval {lo}–{hi}%.",
+    "statDownloads": "downloads of the ridge gourd dataset on IEEE DataPort",
+    "statPatent": "Registered design, Government of India",
+    "statPapers": "Springer publications",
+    "pressLine": "Featured in Punjab Kesari, Jaipur edition, 10 October 2025.",
+    "readResearch": "Read the research",
+    "toolsTitle": "Everything around the diagnosis",
+    "toolsSub": "A diagnosis is the start. These tools help you decide, plan and record.",
+    "privacyTitle": "Your photos stay on your phone",
+    "privacyBody": "The model is downloaded once (about {mb} MB) and runs inside your browser. Nothing is uploaded unless you choose to share a report. After the first visit LeafCheckup works with no signal at all.",
+    "orgTitle": "Free for everyone, open to builders",
+    "orgBody": "No plans, no paywall. Farmers, extension workers and researchers use every tool for free, and developers can call the same model through a free API with fair-use limits.",
+    "orgCta": "Read the API docs",
+    "orgCta2": "About the project",
+    "faqTitle": "Questions",
+    "faq": [
+      {
+        "q": "Is it really free?",
+        "a": "Yes, completely. There are no plans or paid features. Diagnosis runs on your own device, so it costs nothing to serve, and the developer API is free with fair-use limits."
+      },
+      {
+        "q": "Which crops and diseases does it cover?",
+        "a": "{coverageDetail} If you photograph something else, LeafCheckup tells you it is not a supported leaf instead of guessing."
+      },
+      {
+        "q": "How accurate is it?",
+        "a": "On a held-out set of leaves the model never saw during training it is right {acc}% of the time. It can still be wrong, especially on blurry photos or early symptoms, so treat it as a second opinion and confirm serious outbreaks with your KVK."
+      },
+      {
+        "q": "How do I know the accuracy is genuine?",
+        "a": "The test leaves were set aside before training and never seen by the model. Many leaf datasets include several edited copies of each photo, and if copies of one leaf end up in both training and testing the score looks better than it is. LeafCheckup uses only the original photos, keeps every leaf in exactly one set, and removes near-identical and mislabelled photos. The model card on the Research page lists the full method, the confusion matrix and the known limitations."
+      },
+      {
+        "q": "Is the research behind it published?",
+        "a": "Yes. LeafCheckup builds on a peer-reviewed paper in Springer's Communications in Computer and Information Science series, a review in Discover Artificial Intelligence, two public datasets on IEEE DataPort and Mendeley Data, and a registered Indian design for the field data-collection device. The Research page links to each one by its official DOI or registration number."
+      },
+      {
+        "q": "Are my photos uploaded or stored?",
+        "a": "No. The AI runs inside your browser, so photos never leave your phone. Scan history is saved only on your device and you can delete it at any time. The site uses no advertising or tracking cookies."
+      },
+      {
+        "q": "What if the result looks wrong?",
+        "a": "Retake the photo with one leaf filling the frame, in daylight and in focus, then compare the symptoms with the field guide for that disease. If the result stays unclear or the problem is spreading, show the plant to your Krishi Vigyan Kendra or an agronomist. LeafCheckup is a second opinion, not a replacement for one."
+      },
+      {
+        "q": "Does it work on iPhone and Android?",
+        "a": "Yes. LeafCheckup runs in any modern browser, including Safari on iPhone and Chrome on Android, and on laptops. There is nothing to download from an app store."
+      },
+      {
+        "q": "Does it work without internet?",
+        "a": "Yes. After the first visit the app and model are stored on your phone. You can install LeafCheckup to your home screen from the browser menu."
+      },
+      {
+        "q": "Will you add more crops?",
+        "a": "Yes. Each new crop needs a labelled set of real field photos, so crops are added as those datasets are collected and checked. If you have one for a crop you grow, use the contact form on the About page."
+      },
+      {
+        "q": "Who built LeafCheckup?",
+        "a": "Pranay Agarwal, a computer science graduate of BIT Mesra working on computer vision and AI for agriculture. LeafCheckup is based on his ridge gourd research. The About page has the full story and a contact form."
+      }
+    ]
+  },
+  "tool": {
+    "title": "Diagnose a leaf",
+    "takePhoto": "Scan with camera",
+    "upload": "Upload a photo",
+    "drop": "Drop a leaf photo here",
+    "paste": "or paste an image",
+    "tryOne": "No leaf handy? Try one of these:",
+    "loadingModel": "Getting the model ready ({pct}%)",
+    "loadingModelShort": "Preparing the model",
+    "analysing": "Reading the leaf",
+    "frameHint": "Drag to position the leaf inside the frame. Pinch or use the slider to zoom.",
+    "zoom": "Zoom",
+    "analyse": "Diagnose this leaf",
+    "change": "Use a different photo",
+    "likely": "Most likely",
+    "confidence": "Model confidence",
+    "confidenceHigh": "High confidence",
+    "confidenceMid": "Moderate confidence. Check the symptoms below.",
+    "confidenceLow": "Low confidence. Take a closer, sharper photo of one leaf.",
+    "also": "Also considered",
+    "looked": "Where the model looked",
+    "lookedHint": "Brighter areas influenced the answer most.",
+    "showHeat": "Show highlight",
+    "hideHeat": "Hide highlight",
+    "whatToDo": "What to do now",
+    "prevent": "Prevent it coming back",
+    "chemical": "If you need a spray",
+    "chemicalNote": "Use only products registered for this crop. Doses and waiting periods come from the label; confirm with your Krishi Vigyan Kendra.",
+    "symptoms": "Signs to confirm",
+    "lookalikes": "Easily confused with",
+    "fullGuide": "Open the full field guide",
+    "unsupportedTitle": "This doesn't look like a supported leaf",
+    "unsupportedBody": "LeafCheckup recognises {crops} leaves. Make sure one leaf fills most of the frame, in daylight, and try again.",
+    "quality": {
+      "blurry": "The photo looks blurry. Hold steady and tap to focus.",
+      "dark": "The photo is too dark. Move into daylight.",
+      "bright": "The photo is washed out. Avoid direct glare on the leaf.",
+      "no_leaf": "There is not much leaf in the frame. Move closer."
+    },
+    "save": "Saved to My scans",
+    "share": "Share",
+    "shareText": "LeafCheckup diagnosis: {name} ({pct}% confidence). Check yours free at {url}",
+    "report": "Download PDF report",
+    "listen": "Read aloud",
+    "stop": "Stop",
+    "again": "Diagnose another leaf",
+    "time": "Analysed on this device in {ms} ms",
+    "disclaimer": "LeafCheckup is a decision-support tool, not a substitute for an agronomist. Confirm serious outbreaks with your local KVK.",
+    "error": "The model could not run in this browser. Update your browser or try Chrome.",
+    "fileError": "That file couldn't be opened as an image. Try a JPG or PNG photo.",
+    "offlineReady": "Ready to work offline",
+    "notSure": "Not sure? Retake the photo closer to the damaged area."
+  },
+  "severity": {
+    "none": "Healthy",
+    "watch": "Keep watching",
+    "act": "Needs action"
+  },
+  "batch": {
+    "title": "Batch scan",
+    "sub": "Diagnose a whole folder of leaf photos at once. Everything runs on this device; large batches take about a second per photo.",
+    "pick": "Choose photos",
+    "drop": "Drop up to 200 photos",
+    "running": "Diagnosing {done} of {total}",
+    "summary": "Summary",
+    "file": "Photo",
+    "result": "Result",
+    "conf": "Confidence",
+    "csv": "Download CSV",
+    "pdf": "Download PDF report",
+    "clear": "Start over",
+    "unsupported": "Not a supported leaf",
+    "limit": "Only the first 200 photos were added."
+  },
+  "scout": {
+    "title": "Field survey",
+    "sub": "Estimate how much of a plot is affected. Walk a W or zig-zag path, scan one leaf from each plant you stop at, and LeafCheckup keeps the tally.",
+    "plot": "Plot name",
+    "plotPh": "e.g. North block, Vidhani",
+    "crop": "Crop",
+    "start": "Start survey",
+    "scan": "Scan a leaf",
+    "scanned": "{n} leaves scanned",
+    "incidence": "Disease incidence",
+    "incidenceNote": "Share of scanned leaves with a disease. Scan at least 20 leaves for a useful estimate.",
+    "byCondition": "By condition",
+    "finish": "Finish and save",
+    "surveys": "Saved surveys",
+    "none": "No surveys yet. Start one when you are in the field.",
+    "location": "Attach GPS location",
+    "delete": "Delete",
+    "report": "PDF report",
+    "advice": "What this means",
+    "adviceLow": "Low incidence. Remove affected leaves or plants and keep scouting weekly.",
+    "adviceMid": "Spreading. Act on the steps in the field guide this week and re-survey in 5–7 days.",
+    "adviceHigh": "High incidence. Act now and contact your KVK or agronomist."
+  },
+  "risk": {
+    "title": "Weather risk outlook",
+    "sub": "Rule-of-thumb risk for the next 7 days, based on temperature, humidity and rain forecast for your location. It points to when to scout harder; it does not replace field checks.",
+    "useLocation": "Use my location",
+    "search": "Or search a village or town",
+    "searchPh": "e.g. Chomu, Jaipur",
+    "loading": "Fetching the forecast",
+    "day": "Day",
+    "low": "Low",
+    "moderate": "Moderate",
+    "high": "High",
+    "whitefly": "Whitefly (spreads mosaic virus)",
+    "leafminer": "Leaf miner",
+    "blight": "Phomopsis blight",
+    "leafhopper": "Leafhopper (spreads little leaf)",
+    "method": "How this is calculated",
+    "methodBody": "Whitefly and leaf miner build up fastest in warm, dry spells (about 25–35 °C, low rain). Phomopsis spreads in warm, humid, wet weather (about 24–32 °C, humidity above 80% or rain). Leafhoppers peak in hot weather. Scores combine these factors for each day. Weather data: Open-Meteo.",
+    "error": "Couldn't get the forecast. Check your connection and try again.",
+    "denied": "Location permission was refused. Search for your town instead."
+  },
+  "calc": {
+    "title": "Spray mix calculator",
+    "sub": "Work out how much product goes in each tank. Always take the dose from the product label or your KVK.",
+    "dose": "Label dose",
+    "doseUnit": "per litre of water",
+    "unit": "Unit",
+    "tank": "Tank size",
+    "litres": "litres",
+    "area": "Area to spray",
+    "acres": "acres",
+    "volume": "Spray volume",
+    "perAcre": "litres per acre",
+    "perTank": "Product per tank",
+    "tanks": "Tanks needed",
+    "total": "Total product",
+    "water": "Total water",
+    "note": "Typical knapsack tanks hold 15–16 litres. Spray volume depends on crop stage: ask your KVK. Wear gloves and a mask, and respect the pre-harvest interval on the label."
+  },
+  "history": {
+    "title": "My scans",
+    "sub": "Saved only on this device. Nothing is uploaded.",
+    "empty": "No scans yet.",
+    "start": "Diagnose a leaf",
+    "export": "Export",
+    "import": "Import",
+    "clear": "Delete all",
+    "confirmClear": "Delete every saved scan on this device? This cannot be undone.",
+    "delete": "Delete",
+    "note": "Note",
+    "notePh": "Plot, plant number, what you saw…",
+    "filter": "Filter",
+    "all": "All"
+  },
+  "diseases": {
+    "title": "Field guide",
+    "sub": "Symptoms, look-alikes and integrated management for every condition LeafCheckup recognises.",
+    "cause": "Cause",
+    "spread": "How it spreads",
+    "sources": "Sources",
+    "diagnose": "Check a leaf for this",
+    "crop": "Crop"
+  },
+  "research": {
+    "title": "The research behind LeafCheckup",
+    "sub": "Peer-reviewed papers, two open field datasets, a registered device design, and a model you can audit.",
+    "papers": "Papers",
+    "datasets": "Datasets",
+    "patent": "Registered design",
+    "benchmark": "Benchmark",
+    "press": "Press",
+    "read": "Read",
+    "modelCard": "Model card",
+    "benchSub": "The MIND-2025 paper reported 92.0% for DenseNet121 + XGBoost with augmentation applied before the train/test split, a limitation the paper itself flags. LeafCheckup re-evaluates on a split by source leaf, so no variant of a test leaf is seen in training.",
+    "protocol": "Protocol",
+    "leaky": "Augment, then random split (paper)",
+    "leakfree": "Split by source leaf (LeafCheckup)",
+    "model": "Model",
+    "acc": "Accuracy",
+    "f1": "Macro F1",
+    "dataQuality": "Data quality fixes",
+    "dataQualityBody": "Building the leaf-level split surfaced {conflicts} photos filed under two different labels and {dups} near-duplicate shots. Conflicting photos were excluded; duplicates were kept in the same split."
+  },
+  "dev": {
+    "title": "LeafCheckup API",
+    "sub": "Send a leaf photo, get a diagnosis, calibrated probabilities and an out-of-distribution flag. JSON over HTTPS.",
+    "getKey": "Get a free API key",
+    "auth": "Authentication",
+    "authBody": "Send your key in the Authorization header as a Bearer token. Keys are shown once; we store only a hash.",
+    "endpoint": "Endpoint",
+    "request": "Request",
+    "response": "Response",
+    "limits": "Limits",
+    "limitsBody": "Free for everyone. Images up to 8 MB (JPEG, PNG or WebP), 30 requests a minute and 5,000 a month per key. Responses include X-RateLimit-Remaining.",
+    "errors": "Errors",
+    "playground": "Try it",
+    "playgroundBody": "Paste a key and pick a photo to call the live API from your browser."
+  },
+  "account": {
+    "title": "Your account",
+    "signInTitle": "Sign in to LeafCheckup",
+    "signInSub": "An account is only needed to create API keys. Diagnosis and every tool work without one.",
+    "google": "Continue with Google",
+    "emailLabel": "Email address",
+    "magic": "Email me a sign-in link",
+    "magicSent": "Check your inbox for a sign-in link.",
+    "devLogin": "Developer sign-in (local only)",
+    "signOut": "Sign out",
+    "plan": "Everything on LeafCheckup is free, including the API.",
+    "keys": "API keys",
+    "keysSub": "Keys let your servers call the LeafCheckup API. Treat them like passwords.",
+    "newKey": "Create key",
+    "keyName": "Key name",
+    "keyCreated": "Copy this key now. You won't see it again.",
+    "revoke": "Revoke",
+    "usage": "API calls this month",
+    "noKeys": "No keys yet.",
+    "authUnavailable": "Sign-in is not configured on this server yet."
+  },
+  "legal": {
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "disclaimer": "Disclaimer",
+    "licenses": "Licences"
+  },
+  "footer": {
+    "about": "LeafCheckup brings peer-reviewed plant disease research to every farmer's phone. Made in Jaipur.",
+    "product": "Product",
+    "company": "Research and company",
+    "legal": "Legal",
+    "rights": "© {year} LeafCheckup. Model and app by Pranay Agarwal. Datasets © their authors under the licences stated on the research page.",
+    "install": "Install app",
+    "offline": "Works offline"
+  },
+  "common": {
+    "back": "Back",
+    "loading": "Loading",
+    "learnMore": "Learn more",
+    "notFound": "This page doesn't exist.",
+    "goHome": "Go to the home page",
+    "offlineTitle": "You're offline",
+    "offlineBody": "Pages you've opened before still work, and leaf diagnosis runs fully offline.",
+    "errorTitle": "Something went wrong",
+    "errorBody": "The page hit an error. Try again; if it keeps happening, tell us at {email}.",
+    "retry": "Try again"
+  },
+  "contact": {
+    "contactTitle": "Get in touch",
+    "name": "Name",
+    "email": "Email",
+    "org": "Organisation",
+    "message": "What would you like to talk about?",
+    "send": "Send message",
+    "sent": "Thanks. I'll reply within two working days."
+  }
+}

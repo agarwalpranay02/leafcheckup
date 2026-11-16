@@ -1,0 +1,13 @@
+import { chromium } from "playwright";
+const browser = await chromium.launch({ executablePath: "/usr/bin/google-chrome", args: ["--no-sandbox"] });
+const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+const p = await ctx.newPage();
+p.on("console", (m) => console.log("console:", m.type(), m.text()));
+p.on("pageerror", (e) => console.log("pageerror:", e.message));
+p.on("requestfailed", (r) => console.log("failed:", r.url(), r.failure()?.errorText));
+await p.goto("http://localhost:3000/en/diagnose", { waitUntil: "networkidle" });
+await p.setInputFiles('input[type=file][accept^="image/jpeg"]', "public/samples/ridge_gourd__leaf_miner.jpg");
+await p.waitForTimeout(8000);
+await p.screenshot({ path: "/home/claude/shots/debug.png" });
+console.log(await p.evaluate(() => document.querySelector('[aria-live]')?.textContent?.slice(0, 300)));
+await browser.close();

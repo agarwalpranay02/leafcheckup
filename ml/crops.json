@@ -1,0 +1,59 @@
+{
+  "$comment": "One entry per dataset. Class ids are <crop>__<condition> and must match an entry in apps/web/src/lib/diseases.ts. Order matters: it fixes the model's output indices, so append new crops at the end. See ADDING_A_CROP.md.",
+  "datasets": [
+    {
+      "crop": "ridge_gourd",
+      "name": "Ridge gourd leaf dataset",
+      "doi": "10.21227/469z-vm04",
+      "layout": "variants",
+      "group_prefix": "rg",
+      "classes": [
+        {
+          "id": "ridge_gourd__healthy",
+          "folder": "Healthy",
+          "prefix": "healthy",
+          "original": "_v1"
+        },
+        {
+          "id": "ridge_gourd__leaf_miner",
+          "folder": "Disease/Leaf_Minor_Infestation",
+          "prefix": "LMI",
+          "original": "_v1"
+        },
+        {
+          "id": "ridge_gourd__mosaic_virus",
+          "folder": "Disease/Mosaic_Virus",
+          "prefix": "MV",
+          "original": "_v1"
+        }
+      ]
+    },
+    {
+      "crop": "brinjal",
+      "name": "Brinjal leaf dataset",
+      "doi": "10.17632/c39p3k87g2.1",
+      "layout": "variants",
+      "group_prefix": "br",
+      "classes": [
+        {
+          "id": "brinjal__healthy",
+          "folder": "Healthy_Leaves",
+          "prefix": "Healthy_Leaves",
+          "original": "_Original"
+        },
+        {
+          "id": "brinjal__little_leaf",
+          "folder": "Unhealthy_Leaves/Little_Leaf",
+          "prefix": "Little_Leaf",
+          "original": "_Original"
+        },
+        {
+          "id": "brinjal__phomopsis_blight",
+          "folder": "Unhealthy_Leaves/Phomopsis_Blight",
+          "prefix": "Phomopsis_Blight",
+          "original": "_Original"
+        }
+      ]
+    }
+  ]
+}

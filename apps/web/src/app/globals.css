@@ -1,0 +1,265 @@
+@import "tailwindcss";
+@import "@fontsource-variable/anek-latin/wdth.css";
+
+/*
+  LeafCheckup design tokens
+  Palette is taken from a ridge gourd field in Rajasthan:
+  leaf-shadow ink, luffa leaf green, the pale underside of a leaf,
+  the yellow gourd flower, and the brown-red of necrotic tissue.
+*/
+@theme {
+  --color-ink: #13231b;
+  --color-ink-soft: #3b4a42;
+  --color-leaf: #2c5a44;
+  --color-leaf-deep: #1d4231;
+  --color-sprout: #dfe9d8;
+  --color-paper: #f5f8f2;
+  --color-card: #ffffff;
+  --color-bloom: #f3c11b;
+  --color-bloom-soft: #fbedb5;
+  --color-blight: #b0442a;
+  --color-blight-soft: #f6dfd6;
+  --color-line: #cfdacb;
+
+  --font-sans: "Anek Latin Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-frame: 28px;
+  --ease-grow: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --bg: var(--color-paper);
+    --fg: var(--color-ink);
+    --muted: var(--color-ink-soft);
+    --surface: var(--color-card);
+    --tint: var(--color-sprout);
+    --rule: var(--color-line);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --bg: #0e1913;
+      --fg: #e7efe4;
+      --muted: #a9b8ad;
+      --surface: #15241c;
+      --tint: #1c3127;
+      --rule: #2a3d32;
+    }
+  }
+  html {
+    background: var(--bg);
+    color: var(--fg);
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern", "liga";
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: inherit;
+    /* 17px on small phones -> 19px on large screens */
+    font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+    line-height: 1.6;
+    font-variation-settings: "wdth" 100;
+    font-weight: 420;
+    min-height: 100dvh;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  @media (max-width: 1023px) {
+    /* room for the bottom tab bar */
+    body { padding-bottom: calc(5.25rem + env(safe-area-inset-bottom)); }
+  }
+  h1, h2, h3, h4 { text-wrap: balance; }
+  p, li { text-wrap: pretty; }
+  ::selection {
+    background: var(--color-bloom);
+    color: var(--color-ink);
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-bloom);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /*
+    Type scale (fluid, ~1.25 ratio on phones -> ~1.333 on desktop).
+    Display sizes use the condensed width of Anek; text sizes use its normal width.
+  */
+  .t-hero { font-size: clamp(3.3rem, 2.2rem + 5.6vw, 7.75rem); }
+  .t-h1 { font-size: clamp(2.9rem, 2.2rem + 3.6vw, 5.5rem); }
+  .t-h2 { font-size: clamp(2.35rem, 1.9rem + 2.3vw, 4rem); }
+  .t-h3 { font-size: clamp(1.6rem, 1.4rem + 0.9vw, 2.15rem); }
+  .t-h4 { font-size: clamp(1.25rem, 1.15rem + 0.45vw, 1.5rem); }
+  .t-lead { font-size: clamp(1.15rem, 1.05rem + 0.45vw, 1.4rem); line-height: 1.55; }
+  .t-small { font-size: 0.9rem; line-height: 1.5; }
+
+  /* Condensed, heavy display type: the brand's voice */
+  .display {
+    font-variation-settings: "wdth" 75;
+    font-weight: 720;
+    letter-spacing: -0.015em;
+    line-height: 0.93;
+  }
+  .title {
+    font-variation-settings: "wdth" 88;
+    font-weight: 640;
+    line-height: 1.12;
+    letter-spacing: -0.004em;
+  }
+  .num {
+    font-variant-numeric: tabular-nums lining-nums;
+    font-variation-settings: "wdth" 80;
+  }
+  .prose-measure {
+    max-width: 64ch;
+  }
+  .muted { color: var(--muted); }
+
+  /* Toasts */
+  .toast {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.8rem 1.1rem;
+    border-radius: 16px;
+    background: var(--color-ink);
+    color: #eef4ea;
+    box-shadow: 0 18px 40px -18px rgb(10 20 15 / 0.6);
+    animation: toast-in 0.35s var(--ease-grow);
+  }
+  @keyframes toast-in { from { transform: translateY(12px); opacity: 0; } }
+
+  /* Hero demo: crossfading specimens with a sweeping scan */
+  .demo-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.9s ease; }
+  .demo-slide[data-on="true"] { opacity: 1; }
+  .demo-chip { animation: chip-in 0.5s var(--ease-grow) both; animation-delay: 1.1s; }
+  @keyframes chip-in { from { transform: translateY(10px) scale(0.96); opacity: 0; } }
+  .scan-once { animation: scan 1.1s var(--ease-grow) both; }
+
+  /* Staggered reveal of a diagnosis result: the one orchestrated moment */
+  .reveal > * { animation: rise 0.55s var(--ease-grow) both; }
+  .reveal > *:nth-child(2) { animation-delay: 60ms; }
+  .reveal > *:nth-child(3) { animation-delay: 120ms; }
+  .reveal > *:nth-child(4) { animation-delay: 180ms; }
+  .reveal > *:nth-child(n + 5) { animation-delay: 240ms; }
+  @keyframes rise { from { transform: translateY(14px); opacity: 0; } }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 3.25rem;
+    padding: 0 1.4rem;
+    border-radius: 999px;
+    font-weight: 620;
+    font-variation-settings: "wdth" 90;
+    font-size: 1.0625rem;
+    transition: transform 0.18s var(--ease-grow), background-color 0.18s, box-shadow 0.18s;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-primary {
+    background: var(--color-bloom);
+    color: var(--color-ink);
+    box-shadow: inset 0 -3px 0 rgb(0 0 0 / 0.12);
+  }
+  .btn-primary:hover { background: #ffd23a; }
+  .btn-leaf {
+    background: var(--color-leaf);
+    color: #fff;
+  }
+  .btn-leaf:hover { background: var(--color-leaf-deep); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--fg);
+    box-shadow: inset 0 0 0 1.5px var(--rule);
+  }
+  .btn-ghost:hover { box-shadow: inset 0 0 0 1.5px var(--fg); }
+  .btn[disabled] { opacity: 0.5; pointer-events: none; }
+
+  .field {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.65rem 0.9rem;
+    border-radius: 14px;
+    background: var(--surface);
+    color: var(--fg);
+    box-shadow: inset 0 0 0 1.5px var(--rule);
+    font: inherit;
+  }
+  .field:focus { outline: none; box-shadow: inset 0 0 0 2px var(--color-leaf); }
+
+  .link {
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+    text-decoration-color: color-mix(in oklab, currentColor 40%, transparent);
+  }
+  .link:hover { text-decoration-color: currentColor; }
+
+  /* The viewfinder: corner brackets that frame a leaf, LeafCheckup's signature shape */
+  .viewfinder { position: relative; }
+  .viewfinder::before,
+  .viewfinder::after,
+  .viewfinder > .vf-b::before,
+  .viewfinder > .vf-b::after {
+    content: "";
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    border: 3px solid var(--vf-color, var(--color-bloom));
+    pointer-events: none;
+    z-index: 3;
+  }
+  .viewfinder::before { top: 14px; left: 14px; border-right: 0; border-bottom: 0; border-top-left-radius: 14px; }
+  .viewfinder::after { top: 14px; right: 14px; border-left: 0; border-bottom: 0; border-top-right-radius: 14px; }
+  .viewfinder > .vf-b::before { bottom: 14px; left: 14px; border-right: 0; border-top: 0; border-bottom-left-radius: 14px; }
+  .viewfinder > .vf-b::after { bottom: 14px; right: 14px; border-left: 0; border-top: 0; border-bottom-right-radius: 14px; }
+
+  .scanline {
+    position: absolute;
+    inset-inline: 8%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-bloom), transparent);
+    box-shadow: 0 0 18px 4px rgb(243 193 27 / 0.45);
+    animation: scan 1.6s var(--ease-grow) infinite alternate;
+    z-index: 2;
+  }
+  @keyframes scan {
+    from { top: 10%; }
+    to { top: 90%; }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .vein-bg {
+      background-image:
+        radial-gradient(circle at 20% 0%, rgb(44 90 68 / 0.35), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgb(243 193 27 / 0.08), transparent 45%) !important;
+    }
+    .viewfinder { box-shadow: 0 0 0 1px rgb(223 233 216 / 0.12); }
+  }
+  .vein-bg {
+    background-image:
+      radial-gradient(circle at 20% 0%, color-mix(in oklab, var(--color-sprout) 70%, transparent), transparent 55%),
+      radial-gradient(circle at 100% 100%, color-mix(in oklab, var(--color-bloom-soft) 55%, transparent), transparent 45%);
+  }
+}
+
+@media print {
+  header, footer, nav, .no-print { display: none !important; }
+  body { background: #fff; color: #000; }
+}

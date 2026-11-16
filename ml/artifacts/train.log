@@ -1,0 +1,18 @@
+{"epoch": 1, "train_loss": 2.476321451125606, "val_acc": 0.836448609828949, "val_macro_f1": 0.783534149671013, "sec": 94.98186540603638}
+{"epoch": 2, "train_loss": 1.4060492554018575, "val_acc": 0.836448609828949, "val_macro_f1": 0.7796818974948692, "sec": 115.84479355812073}
+{"epoch": 3, "train_loss": 1.0262224828043292, "val_acc": 0.827102780342102, "val_macro_f1": 0.8037702838101352, "sec": 88.20451521873474}
+{"epoch": 4, "train_loss": 0.9429910048361747, "val_acc": 0.9252336621284485, "val_macro_f1": 0.9078471692802487, "sec": 91.30617690086365}
+{"epoch": 5, "train_loss": 0.7891531663556253, "val_acc": 0.9392523169517517, "val_macro_f1": 0.9161544493633339, "sec": 90.67873907089233}
+{"epoch": 6, "train_loss": 0.7347352620094053, "val_acc": 0.9392523169517517, "val_macro_f1": 0.9144004472628651, "sec": 87.76153922080994}
+{"epoch": 7, "train_loss": 0.6788824604403588, "val_acc": 0.9345794320106506, "val_macro_f1": 0.9045753127058064, "sec": 85.2410569190979}
+{"epoch": 8, "train_loss": 0.6381456948095753, "val_acc": 0.9392523169517517, "val_macro_f1": 0.9171374463170129, "sec": 88.89377212524414}
+{"epoch": 9, "train_loss": 0.5969876358585973, "val_acc": 0.9392523169517517, "val_macro_f1": 0.9171374463170129, "sec": 90.76061940193176}
+{"epoch": 10, "train_loss": 0.5966888858426002, "val_acc": 0.9205607771873474, "val_macro_f1": 0.8995671434015161, "sec": 88.02713966369629}
+{"epoch": 11, "train_loss": 0.5709348186369865, "val_acc": 0.9392523169517517, "val_macro_f1": 0.9224935977208705, "sec": 88.48524403572083}
+{"epoch": 12, "train_loss": 0.5545741185065238, "val_acc": 0.9345794320106506, "val_macro_f1": 0.9184886974761106, "sec": 87.17038822174072}
+{"epoch": 13, "train_loss": 0.5541682724029787, "val_acc": 0.9345794320106506, "val_macro_f1": 0.9147109690675811, "sec": 87.77048254013062}
+{"epoch": 14, "train_loss": 0.5525218334890181, "val_acc": 0.9345794320106506, "val_macro_f1": 0.9147109690675811, "sec": 88.09153985977173}
+/ml/train.py:108: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  return float(t.exp())
+TEST {"accuracy": 0.9493087557603687, "accuracy_ci95": [0.9170506912442397, 0.9769585253456221], "macro_f1": 0.942017400825491, "ece": 0.01756373792886734}

@@ -1,0 +1,14 @@
+featurizing 9000 images…
+{
+ "paper_protocol": {
+  "accuracy": 0.9148148148148149,
+  "macro_f1": 0.8946071480704604,
+  "n_test": 1350,
+  "test_leaves_also_in_train": "545/545"
+ },
+ "leak_free_protocol": {
+  "accuracy": 0.9204545454545454,
+  "macro_f1": 0.8896703296703298,
+  "n_test": 88
+ }
+}

@@ -1,0 +1,107 @@
+import type { Metadata, Viewport } from "next";
+import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
+import { headers } from "next/headers";
+import { notFound } from "next/navigation";
+import type { ReactNode } from "react";
+import { routing } from "@/i18n/routing";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
+import { ServiceWorker } from "@/components/ServiceWorker";
+import { MobileTabBar } from "@/components/MobileTabBar";
+import { Toaster } from "@/components/Toaster";
+import { SITE } from "@/lib/site";
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f5f8f2" },
+    { media: "(prefers-color-scheme: dark)", color: "#0e1913" },
+  ],
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "meta" });
+  return {
+    metadataBase: new URL(SITE.url),
+    title: { default: t("title"), template: `%s · ${SITE.name}` },
+    description: t("description"),
+    applicationName: SITE.name,
+    manifest: "/manifest.webmanifest",
+    alternates: {
+      canonical: "/",
+    },
+    openGraph: {
+      type: "website",
+      siteName: SITE.name,
+      title: t("title"),
+      description: t("description"),
+      locale: "en_IN",
+    },
+    twitter: { card: "summary_large_image", title: t("title"), description: t("description") },
+    appleWebApp: { capable: true, title: SITE.name, statusBarStyle: "default" },
+    formatDetection: { telephone: false },
+    icons: { icon: "/icons/icon.svg", apple: "/icons/apple-touch-icon.png" },
+    robots: { index: true, follow: true },
+  };
+}
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export default async function LocaleLayout({ children, params }: { children: ReactNode; params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) notFound();
+  setRequestLocale(locale);
+  const messages = await getMessages();
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
+  const t = await getTranslations({ locale, namespace: "meta" });
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": `${SITE.url}/#org`,
+        name: SITE.name,
+        url: SITE.url,
+        logo: `${SITE.url}/icons/icon-512.png`,
+        founder: { "@type": "Person", name: SITE.founder },
+        email: SITE.email,
+      },
+      {
+        "@type": "WebApplication",
+        name: SITE.name,
+        url: SITE.url,
+        applicationCategory: "UtilitiesApplication",
+        operatingSystem: "Any (web browser)",
+        inLanguage: locale,
+        description: t("description"),
+        offers: { "@type": "Offer", price: "0", priceCurrency: "INR" },
+        publisher: { "@id": `${SITE.url}/#org` },
+      },
+    ],
+  };
+
+  return (
+    <html lang={locale} dir="ltr" suppressHydrationWarning>
+      <body className="flex min-h-dvh flex-col antialiased">
+        <script type="application/ld+json" nonce={nonce} dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <SiteHeader />
+          <main id="main" className="flex-1">
+            {children}
+          </main>
+          <SiteFooter />
+          <MobileTabBar />
+          <Toaster />
+          <ServiceWorker />
+        </NextIntlClientProvider>
+      </body>
+    </html>
+  );
+}

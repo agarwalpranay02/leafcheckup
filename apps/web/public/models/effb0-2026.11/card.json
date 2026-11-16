@@ -1,0 +1,287 @@
+{
+ "version": "effb0-2026.11",
+ "classes": [
+  "ridge_gourd__healthy",
+  "ridge_gourd__leaf_miner",
+  "ridge_gourd__mosaic_virus",
+  "brinjal__healthy",
+  "brinjal__little_leaf",
+  "brinjal__phomopsis_blight"
+ ],
+ "split": {
+  "near_duplicates_merged": 29,
+  "label_conflicts_removed": [
+   [
+    "healthy_189_v1.jpg",
+    "MV_599_v1.jpg"
+   ],
+   [
+    "LMI_406_v1.jpg",
+    "MV_549_v1.jpg"
+   ],
+   [
+    "Little_Leaf_007_Original.jpg",
+    "Phomopsis_Blight_052_Original.jpg"
+   ],
+   [
+    "Little_Leaf_011_Original.jpg",
+    "Phomopsis_Blight_003_Original.jpg"
+   ]
+  ],
+  "counts": {
+   "train": {
+    "ridge_gourd__healthy": 209,
+    "ridge_gourd__leaf_miner": 88,
+    "ridge_gourd__mosaic_virus": 123,
+    "brinjal__healthy": 279,
+    "brinjal__little_leaf": 138,
+    "brinjal__phomopsis_blight": 174
+   },
+   "val": {
+    "ridge_gourd__healthy": 45,
+    "ridge_gourd__leaf_miner": 18,
+    "ridge_gourd__mosaic_virus": 25,
+    "brinjal__healthy": 59,
+    "brinjal__little_leaf": 30,
+    "brinjal__phomopsis_blight": 37
+   },
+   "test": {
+    "ridge_gourd__healthy": 45,
+    "ridge_gourd__leaf_miner": 18,
+    "ridge_gourd__mosaic_virus": 25,
+    "brinjal__healthy": 62,
+    "brinjal__little_leaf": 30,
+    "brinjal__phomopsis_blight": 37
+   }
+  }
+ },
+ "per_class": {
+  "ridge_gourd__healthy": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1-score": 1.0,
+   "support": 45.0
+  },
+  "ridge_gourd__leaf_miner": {
+   "precision": 1.0,
+   "recall": 0.9444444444444444,
+   "f1-score": 0.9714285714285714,
+   "support": 18.0
+  },
+  "ridge_gourd__mosaic_virus": {
+   "precision": 0.9615384615384616,
+   "recall": 1.0,
+   "f1-score": 0.9803921568627451,
+   "support": 25.0
+  },
+  "brinjal__healthy": {
+   "precision": 0.9538461538461539,
+   "recall": 1.0,
+   "f1-score": 0.9763779527559056,
+   "support": 62.0
+  },
+  "brinjal__little_leaf": {
+   "precision": 0.9166666666666666,
+   "recall": 0.7333333333333333,
+   "f1-score": 0.8148148148148148,
+   "support": 30.0
+  },
+  "brinjal__phomopsis_blight": {
+   "precision": 0.875,
+   "recall": 0.9459459459459459,
+   "f1-score": 0.9090909090909091,
+   "support": 37.0
+  }
+ },
+ "confusion": [
+  [
+   45,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  [
+   0,
+   17,
+   1,
+   0,
+   0,
+   0
+  ],
+  [
+   0,
+   0,
+   25,
+   0,
+   0,
+   0
+  ],
+  [
+   0,
+   0,
+   0,
+   62,
+   0,
+   0
+  ],
+  [
+   0,
+   0,
+   0,
+   3,
+   22,
+   5
+  ],
+  [
+   0,
+   0,
+   0,
+   0,
+   2,
+   35
+  ]
+ ],
+ "train_log": [
+  {
+   "epoch": 1,
+   "train_loss": 2.476321451125606,
+   "val_acc": 0.836448609828949,
+   "val_macro_f1": 0.783534149671013,
+   "sec": 94.98186540603638
+  },
+  {
+   "epoch": 2,
+   "train_loss": 1.4060492554018575,
+   "val_acc": 0.836448609828949,
+   "val_macro_f1": 0.7796818974948692,
+   "sec": 115.84479355812073
+  },
+  {
+   "epoch": 3,
+   "train_loss": 1.0262224828043292,
+   "val_acc": 0.827102780342102,
+   "val_macro_f1": 0.8037702838101352,
+   "sec": 88.20451521873474
+  },
+  {
+   "epoch": 4,
+   "train_loss": 0.9429910048361747,
+   "val_acc": 0.9252336621284485,
+   "val_macro_f1": 0.9078471692802487,
+   "sec": 91.30617690086365
+  },
+  {
+   "epoch": 5,
+   "train_loss": 0.7891531663556253,
+   "val_acc": 0.9392523169517517,
+   "val_macro_f1": 0.9161544493633339,
+   "sec": 90.67873907089233
+  },
+  {
+   "epoch": 6,
+   "train_loss": 0.7347352620094053,
+   "val_acc": 0.9392523169517517,
+   "val_macro_f1": 0.9144004472628651,
+   "sec": 87.76153922080994
+  },
+  {
+   "epoch": 7,
+   "train_loss": 0.6788824604403588,
+   "val_acc": 0.9345794320106506,
+   "val_macro_f1": 0.9045753127058064,
+   "sec": 85.2410569190979
+  },
+  {
+   "epoch": 8,
+   "train_loss": 0.6381456948095753,
+   "val_acc": 0.9392523169517517,
+   "val_macro_f1": 0.9171374463170129,
+   "sec": 88.89377212524414
+  },
+  {
+   "epoch": 9,
+   "train_loss": 0.5969876358585973,
+   "val_acc": 0.9392523169517517,
+   "val_macro_f1": 0.9171374463170129,
+   "sec": 90.76061940193176
+  },
+  {
+   "epoch": 10,
+   "train_loss": 0.5966888858426002,
+   "val_acc": 0.9205607771873474,
+   "val_macro_f1": 0.8995671434015161,
+   "sec": 88.02713966369629
+  },
+  {
+   "epoch": 11,
+   "train_loss": 0.5709348186369865,
+   "val_acc": 0.9392523169517517,
+   "val_macro_f1": 0.9224935977208705,
+   "sec": 88.48524403572083
+  },
+  {
+   "epoch": 12,
+   "train_loss": 0.5545741185065238,
+   "val_acc": 0.9345794320106506,
+   "val_macro_f1": 0.9184886974761106,
+   "sec": 87.17038822174072
+  },
+  {
+   "epoch": 13,
+   "train_loss": 0.5541682724029787,
+   "val_acc": 0.9345794320106506,
+   "val_macro_f1": 0.9147109690675811,
+   "sec": 87.77048254013062
+  },
+  {
+   "epoch": 14,
+   "train_loss": 0.5525218334890181,
+   "val_acc": 0.9345794320106506,
+   "val_macro_f1": 0.9147109690675811,
+   "sec": 88.09153985977173
+  }
+ ],
+ "bench": {
+  "paper_protocol": {
+   "accuracy": 0.9148148148148149,
+   "macro_f1": 0.8946071480704604,
+   "n_test": 1350,
+   "test_leaves_also_in_train": "545/545"
+  },
+  "leak_free_protocol": {
+   "accuracy": 0.9204545454545454,
+   "macro_f1": 0.8896703296703298,
+   "n_test": 88
+  },
+  "leafcheckup_ridge_gourd_subset": {
+   "accuracy": 0.9886363636363636,
+   "macro_f1": 0.9839402427637722,
+   "n_test": 88
+  }
+ },
+ "evaluation": {
+  "protocol": "Leak-free group split by source leaf (70/15/15), originals only, near-duplicates grouped, label conflicts removed",
+  "test_images": 217,
+  "test_accuracy": 0.9493087557603687,
+  "test_accuracy_ci95": [
+   0.9170506912442397,
+   0.9769585253456221
+  ],
+  "test_macro_f1": 0.942017400825491,
+  "test_ece_calibrated": 0.01756373792886734,
+  "onnx_fp32_test_accuracy": 0.9493087557603687,
+  "int8": {
+   "accuracy": 0.42857142857142855,
+   "bytes": 4805486,
+   "kept": false
+  },
+  "ood_synthetic_rejection": 0.8953488372093024,
+  "ood_synthetic_n": 172,
+  "id_test_kept": 0.9861751152073732,
+  "onnx_max_abs_err": 4.482269287109375e-05,
+  "method": "mahalanobis-pca128",
+  "auroc_synthetic": 0.9926588790054657
+ }
+}
