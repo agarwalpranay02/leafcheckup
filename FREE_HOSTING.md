@@ -42,9 +42,9 @@ The site creates its own tables on first start (`AUTO_MIGRATE=1`), so there is n
 ## 3. Set up email (Resend)
 
 1. Sign up at **resend.com** with leafcheckup@gmail.com, the address that should receive messages.
-2. API Keys → Create API key → copy it. This is your `RESEND_API_KEY`.
+2. API Keys → Create API key → set Permission to **Sending access** → copy it. This is your `RESEND_API_KEY`. Resend shows it only once.
 
-Without your own domain, Resend can only deliver to the address you signed up with. That is exactly what the contact form needs. Email sign-in links for other people need a domain (step 7); until then visitors sign in with Google, which only the developer API needs anyway.
+Without your own domain, Resend can only deliver to the address you signed up with. That is exactly what the contact form needs. Email sign-in links for other people need a domain (step 7); until then visitors sign in with Google, which only the developer API needs anyway. The app switches email sign-in on by itself once `EMAIL_FROM` uses a verified domain instead of `@resend.dev`. Replying to a contact email goes straight to the person who wrote it.
 
 ## 4. Deploy the website (Vercel)
 
