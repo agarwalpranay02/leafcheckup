@@ -2,7 +2,7 @@ name: keep inference awake
 
 # Render's free web services sleep after 15 idle minutes. One always-on service fits
 # inside the free 750 instance-hours a month, so ping it every 10 minutes.
-# Set the repository variable INFERENCE_HEALTH_URL (Settings → Secrets and variables → Actions → Variables).
+# Override the URL with the repository variable INFERENCE_HEALTH_URL if the service moves.
 on:
   schedule:
     - cron: "*/10 * * * *"
@@ -12,10 +12,10 @@ permissions: {}
 
 jobs:
   ping:
-    if: ${{ vars.INFERENCE_HEALTH_URL != '' }}
+    if: github.repository == 'agarwalpranay02/leafcheckup' || vars.INFERENCE_HEALTH_URL != ''
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
       - run: curl -fsS --retry 3 --retry-delay 20 --max-time 90 "$URL" -o /dev/null
         env:
-          URL: ${{ vars.INFERENCE_HEALTH_URL }}
+          URL: ${{ vars.INFERENCE_HEALTH_URL || 'https://leafcheckup-inference.onrender.com/healthz' }}
