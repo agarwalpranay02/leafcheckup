@@ -52,7 +52,7 @@ export default async function Developers({ params }: { params: Promise<{ locale:
       <PageHeader title={t("title")} sub={t("sub")}>
         <Link href="/account" className="btn btn-primary mt-8">{t("getKey")}</Link>
       </PageHeader>
-      <div className="mx-auto grid max-w-7xl gap-16 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+      <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)] gap-16 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
         <div className="space-y-12" lang="en">
           <section>
             <h2 className="title text-3xl">{t("endpoint")}</h2>

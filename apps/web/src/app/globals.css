@@ -263,3 +263,9 @@
   header, footer, nav, .no-print { display: none !important; }
   body { background: #fff; color: #000; }
 }
+
+/* Layout safety: a long URL or code token must never widen a page on small screens */
+@layer base {
+  :where(.grid) > * { min-width: 0; }
+  :where(p, li, td, dd) code { overflow-wrap: anywhere; }
+}
