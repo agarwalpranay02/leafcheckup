@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Ship config and roll out
         env:
           SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
