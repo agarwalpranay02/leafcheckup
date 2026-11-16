@@ -15,6 +15,12 @@ import SAMPLE_RESULTS from "@/lib/sample-results.json";
 
 type Phase = "idle" | "live" | "loading" | "analysing" | "result" | "error";
 
+
+/** Haptic tick, only after the person has interacted with the page (browsers block it otherwise). */
+const buzz = (p: number | number[]) => {
+  if (navigator.userActivation?.hasBeenActive) navigator.vibrate?.(p);
+};
+
 export type ToolResult = { diagnosis: Diagnosis; scan: Scan };
 
 export function DiagnoseTool({
@@ -90,7 +96,7 @@ export function DiagnoseTool({
         await saveScan(scan).catch(() => {});
         if (!surveyId) toast(t("save"), { href: "/history", action: "My scans" });
       }
-      navigator.vibrate?.(d.supported ? [18] : [30, 60, 30]);
+      buzz(d.supported ? [18] : [30, 60, 30]);
       setScanId(id);
       setResult(d);
       setHeat(renderHeatmap(d, 448).toDataURL());
@@ -206,7 +212,7 @@ export function DiagnoseTool({
     }
     const bmp = await createImageBitmap(v);
     stopLive();
-    navigator.vibrate?.(12);
+    buzz(12);
     const c = centerCrop(bmp.width, bmp.height);
     setBitmap(bmp);
     setCrop(c);
