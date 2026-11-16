@@ -1,0 +1,26 @@
+{
+ "ridge_gourd__healthy": {
+  "pred": "ridge_gourd__healthy",
+  "p": 0.988
+ },
+ "ridge_gourd__leaf_miner": {
+  "pred": "ridge_gourd__leaf_miner",
+  "p": 0.9976
+ },
+ "ridge_gourd__mosaic_virus": {
+  "pred": "ridge_gourd__mosaic_virus",
+  "p": 0.9946
+ },
+ "brinjal__healthy": {
+  "pred": "brinjal__healthy",
+  "p": 0.981
+ },
+ "brinjal__little_leaf": {
+  "pred": "brinjal__little_leaf",
+  "p": 0.998
+ },
+ "brinjal__phomopsis_blight": {
+  "pred": "brinjal__phomopsis_blight",
+  "p": 0.9882
+ }
+}

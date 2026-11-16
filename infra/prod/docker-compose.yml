@@ -1,0 +1,50 @@
+# Production stack for a single VPS behind Cloudflare.
+# Only Caddy publishes ports; everything else is on a private network.
+name: leafcheckup
+services:
+  caddy:
+    image: caddy:2.10-alpine
+    restart: unless-stopped
+    ports: ["80:80", "443:443", "443:443/udp"]
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./certs:/certs:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    environment: { DOMAIN: "${DOMAIN}", ACME_EMAIL: "${ACME_EMAIL}" }
+    depends_on: [web]
+    networks: [edge, app]
+  web:
+    image: ghcr.io/${GH_OWNER}/leafcheckup-web:${TAG:-latest}
+    restart: unless-stopped
+    env_file: .env
+    environment: { DATABASE_URL: "postgres://leafcheckup:${POSTGRES_PASSWORD}@db:5432/leafcheckup?sslmode=disable", INFERENCE_URL: "http://inference:8000" }
+    read_only: true
+    tmpfs: [/tmp, /app/.next/cache]
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    depends_on: { db: { condition: service_healthy }, inference: { condition: service_healthy } }
+    deploy: { resources: { limits: { memory: 1g } } }
+    networks: [app]
+  inference:
+    image: ghcr.io/${GH_OWNER}/leafcheckup-inference:${TAG:-latest}
+    restart: unless-stopped
+    environment: { INFERENCE_TOKEN: "${INFERENCE_TOKEN}", PUBLIC_SITE_URL: "https://${DOMAIN}", ORT_THREADS: "2" }
+    read_only: true
+    tmpfs: [/tmp]
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    deploy: { resources: { limits: { memory: 1500m } } }
+    networks: [app]
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment: { POSTGRES_USER: leafcheckup, POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}", POSTGRES_DB: leafcheckup }
+    volumes: [pgdata:/var/lib/postgresql/data, ./backups:/backups]
+    healthcheck: { test: ["CMD-SHELL", "pg_isready -U leafcheckup"], interval: 10s, retries: 10 }
+    security_opt: ["no-new-privileges:true"]
+    networks: [app]
+networks:
+  edge: {}
+  app: { internal: true }
+volumes: { pgdata: {}, caddy_data: {}, caddy_config: {} }

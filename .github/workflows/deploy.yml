@@ -1,0 +1,33 @@
+name: Deploy (own server)
+# Only for the self-hosted setup in DEPLOY.md. Vercel deploys itself on every push.
+# Enable by setting the repository variable DEPLOY_TARGET=vps.
+on:
+  workflow_run: { workflows: [CI], types: [completed], branches: [main] }
+  workflow_dispatch:
+permissions: { contents: read }
+concurrency: { group: deploy-production, cancel-in-progress: false }
+
+jobs:
+  deploy:
+    if: vars.DEPLOY_TARGET == 'vps' && (github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success')
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ship config and roll out
+        env:
+          SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          HOST: ${{ secrets.DEPLOY_HOST }}
+          KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+          TAG: ${{ github.event.workflow_run.head_sha || github.sha }}
+        run: |
+          install -m 700 -d ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/id_ed25519 && chmod 600 ~/.ssh/id_ed25519
+          echo "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          scp infra/prod/docker-compose.yml infra/prod/Caddyfile infra/prod/backup.sh deploy@$HOST:/opt/leafcheckup/
+          ssh deploy@$HOST "cd /opt/leafcheckup && sed -i 's/^TAG=.*/TAG=$TAG/' .env && docker compose pull && docker compose up -d --remove-orphans && docker image prune -f"
+      - name: Smoke test
+        run: |
+          for i in $(seq 1 20); do
+            curl -fsS "${{ vars.SITE_URL }}/api/v1/health" && exit 0; sleep 6
+          done; exit 1

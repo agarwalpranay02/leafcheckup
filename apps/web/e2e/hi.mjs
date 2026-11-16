@@ -1,0 +1,15 @@
+import { chromium } from "playwright";
+const b = await chromium.launch({ executablePath: "/usr/bin/google-chrome", args: ["--no-sandbox"] });
+const ctx = await b.newContext({ viewport: { width: 1280, height: 900 } });
+const p = await ctx.newPage();
+const errs = []; p.on("pageerror", (e) => errs.push(e.message)); p.on("console", (m) => m.type() === "error" && errs.push(m.text()));
+await p.goto("http://localhost:3000/hi/diagnose", { waitUntil: "networkidle" });
+await p.setInputFiles('input[type=file][accept^="image/jpeg"]', "public/samples/ridge_gourd__mosaic_virus.jpg");
+await p.waitForSelector("article h2", { timeout: 60000 }); await p.waitForTimeout(700);
+await p.evaluate(() => window.scrollTo(0, 150)); await p.screenshot({ path: "/home/claude/shots/hi-result.png" });
+const reportHref = await p.locator('a[href*="report?scan="]').first().getAttribute("href");
+await p.goto("http://localhost:3000" + reportHref, { waitUntil: "networkidle" }); await p.waitForTimeout(500);
+await p.screenshot({ path: "/home/claude/shots/report.png", fullPage: true });
+await p.goto("http://localhost:3000/en/calculator", { waitUntil: "networkidle" }); await p.screenshot({ path: "/home/claude/shots/calc2.png" });
+console.log("errors", errs);
+await b.close();

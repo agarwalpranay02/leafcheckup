@@ -1,0 +1,28 @@
+import { chromium } from "playwright";
+const B = "http://localhost:3000";
+const b = await chromium.launch({ executablePath: "/usr/bin/google-chrome", args: ["--no-sandbox", "--use-fake-ui-for-media-stream", "--use-fake-device-for-media-stream"] });
+const d = await b.newContext({ viewport: { width: 1440, height: 900 }, permissions: ["camera"] });
+const p = await d.newPage();
+await p.goto(B + "/", { waitUntil: "load" }); await p.waitForTimeout(2600);
+await p.screenshot({ path: "/home/claude/shots/f-home.png" });
+await p.evaluate(() => document.querySelector("#how")?.scrollIntoView()); await p.waitForTimeout(600);
+await p.screenshot({ path: "/home/claude/shots/f-how.png" });
+await p.goto(B + "/diagnose", { waitUntil: "load" });
+await p.setInputFiles('input[type=file][accept^="image/jpeg"]', "public/samples/brinjal__phomopsis_blight.jpg");
+await p.waitForSelector("article h2", { timeout: 60000 }); await p.waitForTimeout(900);
+console.log("timing:", await p.locator("article p.text-sm").last().textContent());
+// second run: warm model
+await p.getByRole("button", { name: "Use a different photo" }).click();
+await p.setInputFiles('input[type=file][accept^="image/jpeg"]', "public/samples/ridge_gourd__mosaic_virus.jpg");
+await p.waitForSelector("article h2", { timeout: 60000 }); await p.waitForTimeout(900);
+console.log("warm:", await p.locator("article p.text-sm").last().textContent());
+await p.screenshot({ path: "/home/claude/shots/f-result.png" });
+await p.goto(B + "/about", { waitUntil: "load" }); await p.waitForTimeout(500);
+await p.screenshot({ path: "/home/claude/shots/f-about.png", fullPage: true });
+const m = await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, permissions: ["camera"] });
+const q = await m.newPage();
+await q.goto(B + "/", { waitUntil: "load" }); await q.waitForTimeout(2600);
+await q.screenshot({ path: "/home/claude/shots/f-m-home.png" });
+await q.goto(B + "/diagnose?camera=1", { waitUntil: "load" }); await q.waitForTimeout(4000);
+await q.screenshot({ path: "/home/claude/shots/f-m-live.png" });
+await b.close();

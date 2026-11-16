@@ -1,0 +1,11 @@
+Third-party components
+- Next.js, React (MIT) · next-intl (MIT) · better-auth (MIT) · Drizzle ORM (Apache-2.0) · PGlite (Apache-2.0)
+- ONNX Runtime and ONNX Runtime Web (MIT) · FastAPI (MIT) · Uvicorn (BSD-3) · Pillow (MIT-CMU) · NumPy (BSD-3)
+- PyTorch Image Models / timm pretrained weights (Apache-2.0) · PyTorch (BSD-3)
+- Anek Latin / Anek Devanagari fonts by Ek Type (SIL OFL 1.1) via Fontsource
+- Tailwind CSS (MIT) · idb-keyval (Apache-2.0) · Zod (MIT)
+Datasets
+- Indian Ridge Gourd Leaf Image Dataset, IEEE DataPort, doi:10.21227/469z-vm04 (CC BY 4.0)
+- Brinjal Leaf Image Dataset, Mendeley Data, doi:10.17632/c39p3k87g2.1
+Data services
+- Weather data by Open-Meteo.com (CC BY 4.0)

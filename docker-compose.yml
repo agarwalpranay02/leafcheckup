@@ -1,0 +1,22 @@
+# Local full stack: web + inference + Postgres.  `docker compose up --build`
+services:
+  db:
+    image: postgres:17-alpine
+    environment: { POSTGRES_USER: leafcheckup, POSTGRES_PASSWORD: leafcheckup, POSTGRES_DB: leafcheckup }
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck: { test: ["CMD-SHELL", "pg_isready -U leafcheckup"], interval: 5s, retries: 10 }
+  inference:
+    build: { context: ., dockerfile: services/inference/Dockerfile.compose }
+    environment: { INFERENCE_TOKEN: local-dev-token-0123456789, PUBLIC_SITE_URL: "http://localhost:3000" }
+  web:
+    build: { context: apps/web, args: { NEXT_PUBLIC_SITE_URL: "http://localhost:3000" } }
+    ports: ["3000:3000"]
+    environment:
+      DATABASE_URL: postgres://leafcheckup:leafcheckup@db:5432/leafcheckup?sslmode=disable
+      BETTER_AUTH_URL: http://localhost:3000
+      BETTER_AUTH_SECRET: local-only-secret-0123456789abcdef0123456789
+      API_KEY_PEPPER: local-only-pepper-0123456789
+      INFERENCE_URL: http://inference:8000
+      INFERENCE_TOKEN: local-dev-token-0123456789
+    depends_on: { db: { condition: service_healthy }, inference: { condition: service_started } }
+volumes: { pgdata: {} }
