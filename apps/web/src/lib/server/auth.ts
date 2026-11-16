@@ -55,5 +55,8 @@ export function getAuth(): Promise<Auth> {
 
 export const authProviders = {
   google: Boolean(env.GOOGLE_CLIENT_ID && env.GOOGLE_CLIENT_SECRET),
-  email: Boolean(env.RESEND_API_KEY) || !isProd,
+  // Resend's shared test sender (@resend.dev) only delivers to the account owner, so
+  // email sign-in stays off until EMAIL_FROM uses a verified domain. Contact mail to
+  // CONTACT_INBOX still works with the test sender.
+  email: (Boolean(env.RESEND_API_KEY) && !/@resend\.dev>?$/i.test(env.EMAIL_FROM)) || !isProd,
 };

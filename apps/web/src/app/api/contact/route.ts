@@ -30,7 +30,7 @@ export async function POST(req: Request) {
   await db.insert(schema.contactMessage).values({ id: randomUUID(), name: b.name, email: b.email, org: b.org || null, message: b.message, locale: b.locale, ipHash: hashIp(ip) });
   if (env.CONTACT_INBOX) {
     const text = `From: ${b.name} <${b.email}>\nOrg: ${b.org}\n\n${b.message}`;
-    await sendMail(env.CONTACT_INBOX, `LeafCheckup enquiry: ${b.name}${b.org ? ` (${b.org})` : ""}`, `<pre>${escapeHtml(text)}</pre>`, text).catch((e) => console.error("contact mail", e));
+    await sendMail(env.CONTACT_INBOX, `LeafCheckup enquiry: ${b.name}${b.org ? ` (${b.org})` : ""}`, `<pre>${escapeHtml(text)}</pre>`, text, b.email).catch((e) => console.error("contact mail", e));
   }
   return NextResponse.json({ ok: true }, { status: 201 });
 }
