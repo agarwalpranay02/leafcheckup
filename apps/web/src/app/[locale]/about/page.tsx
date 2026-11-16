@@ -42,7 +42,7 @@ export default async function About({ params }: { params: Promise<{ locale: stri
           <h2 className="display t-h2">Why it exists</h2>
           <div className="space-y-4 t-lead prose-measure">
             <p>Most plant-disease AI is trained on tomato, potato and grape, because that is where the big public datasets are. Farmers growing local crops like ridge gourd get nothing. On farms around Jaipur, growers say diseases usually go unnoticed until they have already spread.</p>
-            <p>So the work started in the field: photographing leaves on farms in Rajasthan, labelling them, and publishing the datasets openly. The ridge gourd set has been downloaded {RESEARCH.datasets[0].downloads?.toLocaleString("en-IN")} times on IEEE DataPort.</p>
+            <p>So the work started in the field: photographing leaves on farms in Rajasthan, labelling them, and publishing the datasets openly. Together the two sets hold {(RESEARCH.datasets[0].originals + RESEARCH.datasets[1].originals).toLocaleString("en-IN")} original field photos.</p>
             <p>The model was then rebuilt for real use. Its evaluation was rerun on a strict split by source leaf, so no augmented copy of a test leaf is ever seen in training. It was made small enough to run inside a phone&apos;s browser, and it learned to say &ldquo;this isn&apos;t a leaf I know&rdquo; instead of guessing.</p>
           </div>
         </section>
@@ -87,11 +87,11 @@ export default async function About({ params }: { params: Promise<{ locale: stri
           <h2 id="recognition" className="display t-h2">Recognition</h2>
           <ul className="divide-y divide-[var(--rule)] border-y border-[var(--rule)]">
             {RESEARCH.papers.map((p) => (
-              <li key={p.id} className="py-4"><p className="font-[600]">{p.title}</p><p className="muted t-small mt-1">{p.venue}</p></li>
+              <li key={p.id} className="py-4"><p className="font-[600]">{p.url ? <a className="link" href={p.url} target="_blank" rel="noopener noreferrer">{p.title}</a> : p.title}</p><p className="muted t-small mt-1">{p.venue}</p></li>
             ))}
-            <li className="py-4"><p className="font-[600]">Registered design {RESEARCH.patent.number}, Government of India</p><p className="muted t-small mt-1">{RESEARCH.patent.title}</p></li>
+            <li className="py-4"><p className="font-[600]">Registered design {RESEARCH.patent.number}, Government of India</p><p className="muted t-small mt-1">{RESEARCH.patent.title}. <a className="link" href={RESEARCH.patent.verifyUrl} target="_blank" rel="noopener noreferrer">Verify on IP India</a></p></li>
             <li className="py-4"><p className="font-[600]">Featured in Punjab Kesari, Jaipur, 10 October 2025</p></li>
-            <li className="py-4"><p className="font-[600]">Two open datasets, {RESEARCH.datasets[0].downloads?.toLocaleString("en-IN")}+ downloads</p><p className="muted t-small mt-1">IEEE DataPort and Mendeley Data</p></li>
+            <li className="py-4"><p className="font-[600]">Two open datasets, {(RESEARCH.datasets[0].originals + RESEARCH.datasets[1].originals).toLocaleString("en-IN")} original field photos</p><p className="muted t-small mt-1"><a className="link" href={RESEARCH.datasets[0].url} target="_blank" rel="noopener noreferrer">IEEE DataPort</a> and <a className="link" href={RESEARCH.datasets[1].url} target="_blank" rel="noopener noreferrer">Mendeley Data</a></p></li>
           </ul>
         </section>
 

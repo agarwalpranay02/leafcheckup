@@ -13,7 +13,6 @@ export default function manifest(): Manifest {
     start_url: "/diagnose?source=pwa",
     scope: "/",
     display: "standalone",
-    orientation: "portrait",
     background_color: "#f5f8f2",
     theme_color: "#1d4231",
     lang: "en-IN",
@@ -29,6 +28,11 @@ export default function manifest(): Manifest {
       { src: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
       { src: "/icons/icon-maskable-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
       { src: "/icons/icon.svg", sizes: "any", type: "image/svg+xml" },
+    ],
+    // Lets Chrome and Android show a richer install dialog
+    screenshots: [
+      { src: "/screenshots/wide.jpg", sizes: "1440x900", type: "image/jpeg", form_factor: "wide", label: "Diagnose a leaf from one photo" },
+      { src: "/screenshots/narrow.jpg", sizes: "780x1688", type: "image/jpeg", form_factor: "narrow", label: "LeafCheckup on a phone" },
     ],
     shortcuts: [
       { name: "Diagnose a leaf", url: "/diagnose?source=shortcut" },

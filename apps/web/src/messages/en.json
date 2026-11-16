@@ -78,7 +78,7 @@
     "evidenceSub": "LeafCheckup comes out of research at BIT Mesra on diagnosing diseases of local Indian crops that large datasets ignore.",
     "statAccuracy": "accuracy on leaves the model never saw",
     "statAccuracyNote": "Leaf-level held-out test, {n} photos. 95% interval {lo}–{hi}%.",
-    "statDownloads": "downloads of the ridge gourd dataset on IEEE DataPort",
+    "statDownloads": "original field photos published in two open datasets",
     "statPatent": "Registered design, Government of India",
     "statPapers": "Springer publications",
     "pressLine": "Featured in Punjab Kesari, Jaipur edition, 10 October 2025.",
@@ -122,8 +122,8 @@
         "a": "Retake the photo with one leaf filling the frame, in daylight and in focus, then compare the symptoms with the field guide for that disease. If the result stays unclear or the problem is spreading, show the plant to your Krishi Vigyan Kendra or an agronomist. LeafCheckup is a second opinion, not a replacement for one."
       },
       {
-        "q": "Does it work on iPhone and Android?",
-        "a": "Yes. LeafCheckup runs in any modern browser, including Safari on iPhone and Chrome on Android, and on laptops. There is nothing to download from an app store."
+        "q": "Can I install it on my phone or computer?",
+        "a": "Yes, free and without an app store. Android (Chrome or Samsung Internet): tap Install app, or open the browser menu and choose Install app. iPhone and iPad: open the site in Safari, tap Share, then Add to Home Screen. Windows, Mac, Linux and Chromebook: in Chrome or Edge, click the install icon in the address bar or Install app on the site; in Safari on a Mac, choose File, then Add to Dock. Once installed it opens full screen and works offline. It also runs in any modern browser without installing."
       },
       {
         "q": "Does it work without internet?",

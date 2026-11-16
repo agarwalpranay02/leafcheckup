@@ -106,7 +106,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           </div>
           <dl className="divide-y divide-[var(--rule)] border-y border-[var(--rule)]">
             <Fact value={`${acc}%`} label={t("statAccuracy")} note={t("statAccuracyNote", { n: facts.testImages, lo: (facts.ci[0] * 100).toFixed(1), hi: (facts.ci[1] * 100).toFixed(1) })} />
-            <Fact value={RESEARCH.datasets[0].downloads!.toLocaleString("en-IN")} label={t("statDownloads")} note={`DOI ${RESEARCH.datasets[0].doi}`} />
+            <Fact value={(RESEARCH.datasets[0].originals + RESEARCH.datasets[1].originals).toLocaleString("en-IN")} label={t("statDownloads")} note="IEEE DataPort and Mendeley Data, open access" />
             <Fact value={RESEARCH.patent.number} label={t("statPatent")} note={RESEARCH.patent.klass} />
             <Fact value="2" label={t("statPapers")} note="Springer CCIS (MIND 2025) · Discover Artificial Intelligence (2026)" />
           </dl>

@@ -93,3 +93,28 @@ test("API rejects missing keys", async ({ request }) => {
   const r = await request.post("/api/v1/diagnose", { data: { image_base64: "x" } });
   expect(r.status()).toBe(401);
 });
+
+test.describe("install on iPhone", () => {
+  test.use({
+    userAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 26_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.1 Mobile/15E148 Safari/604.1",
+    viewport: { width: 390, height: 844 },
+    hasTouch: true,
+    isMobile: true,
+  });
+  test("shows Add to Home Screen steps", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("button", { name: "Menu" }).or(page.getByRole("button", { name: /menu/i })).first().click();
+    await page.getByRole("button", { name: "Install app" }).last().click();
+    await expect(page.getByRole("dialog", { name: "Install on iPhone or iPad" })).toContainText("Add to Home Screen");
+  });
+});
+
+test("manifest is installable", async ({ request }) => {
+  const m = await (await request.get("/manifest.webmanifest")).json();
+  expect(m.display).toBe("standalone");
+  expect(m.icons.some((i: { sizes: string }) => i.sizes === "512x512")).toBe(true);
+  expect(m.icons.some((i: { purpose?: string }) => i.purpose === "maskable")).toBe(true);
+  for (const s of m.screenshots) expect((await request.get(s.src)).status()).toBe(200);
+  expect((await request.get("/sw.js")).status()).toBe(200);
+  expect((await request.get("/icons/apple-touch-icon.png")).status()).toBe(200);
+});

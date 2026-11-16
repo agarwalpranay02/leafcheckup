@@ -42,7 +42,7 @@ export function SiteHeader() {
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
   return (
-    <header className={`sticky top-0 z-40 transition-[background-color,box-shadow] duration-300 ${scrolled || open ? "bg-[color-mix(in_oklab,var(--bg)_86%,transparent)] shadow-[0_1px_0_var(--rule)] backdrop-blur-md" : "bg-transparent"}`}>
+    <header className={`sticky top-0 z-40 transition-[background-color,box-shadow] duration-300 ${open ? "bg-[var(--bg)] shadow-[0_1px_0_var(--rule)]" : scrolled ? "bg-[color-mix(in_oklab,var(--bg)_86%,transparent)] shadow-[0_1px_0_var(--rule)] backdrop-blur-md" : "bg-transparent"}`}>
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-full focus:bg-[var(--color-bloom)] focus:px-4 focus:py-2 focus:text-[var(--color-ink)]">
         {t("skip")}
       </a>

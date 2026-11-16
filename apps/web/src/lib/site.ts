@@ -3,7 +3,7 @@ export const SITE = {
   name: "LeafCheckup",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://leafcheckup.com",
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "leafcheckup@gmail.com",
-  github: "https://github.com/agarwalpranay02/Hybrid-Deep-Learning-for-Plant-Disease-Diagnosis",
+  github: "https://github.com/agarwalpranay02/leafcheckup",
   founder: "Pranay Agarwal",
 } as const;
 
@@ -13,16 +13,20 @@ export const RESEARCH = {
       id: "mind2025",
       title:
         "A Hybrid Deep Learning Approach for Automated Plant Disease Diagnosis in Indian Ridge Gourd: Dataset Creation and Real-World Application",
-      venue: "MIND 2025, MNIT Jaipur. Springer Communications in Computer and Information Science (CCIS 2980–2981)",
+      venue: "MIND 2025, MNIT Jaipur. Springer Communications in Computer and Information Science, vol. 2980, pp. 83–94",
       year: 2026,
-      url: null as string | null,
+      doi: "10.1007/978-3-032-31233-4_7",
+      url: "https://doi.org/10.1007/978-3-032-31233-4_7" as string | null,
+      code: "https://github.com/agarwalpranay02/Hybrid-Deep-Learning-for-Plant-Disease-Diagnosis" as string | null,
     },
     {
       id: "discover2026",
       title: "A comprehensive review and bibliometric analysis of deep learning applications in plant disease detection",
       venue: "Discover Artificial Intelligence 6, 1459. Springer Nature, open access",
       year: 2026,
-      url: "https://doi.org/10.1007/s44163-026-02310-z",
+      doi: "10.1007/s44163-026-02310-z",
+      url: "https://doi.org/10.1007/s44163-026-02310-z" as string | null,
+      code: null as string | null,
     },
   ],
   datasets: [
@@ -35,7 +39,6 @@ export const RESEARCH = {
       license: "CC BY 4.0",
       originals: 600,
       images: 9000,
-      downloads: 9217,
       where: "Vidhani, Jaipur, Rajasthan",
     },
     {
@@ -47,7 +50,6 @@ export const RESEARCH = {
       license: "See dataset page",
       originals: 850,
       images: 13600,
-      downloads: null as number | null,
       where: "Rajasthan, India",
     },
   ],
@@ -58,6 +60,8 @@ export const RESEARCH = {
     title: "Internet of Things based device for real-time data collection and augmentation for plant and agricultural samples",
     filed: "2025-10-09",
     certified: "2026-01-06",
+    // The public register has no per-record link; visitors search the number there
+    verifyUrl: "https://search.ipindia.gov.in/designsearch",
   },
   press: [{ outlet: "Punjab Kesari", city: "Jaipur", date: "2025-10-10" }],
 } as const;

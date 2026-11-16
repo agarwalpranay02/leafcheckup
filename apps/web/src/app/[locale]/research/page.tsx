@@ -83,9 +83,11 @@ export default async function Research({ params }: { params: Promise<{ locale: s
                 <div>
                   <p className="title t-h3 prose-measure">{p.title}</p>
                   <p className="text-[var(--muted)]">{p.venue}</p>
+                  <p className="mt-1 text-sm text-[var(--muted)]">DOI <a className="link" href={`https://doi.org/${p.doi}`} target="_blank" rel="noopener noreferrer">{p.doi}</a></p>
                 </div>
                 <div className="flex flex-wrap items-start gap-2">
                   {p.url && <a className="btn btn-leaf min-h-10 px-4 text-sm" href={p.url} target="_blank" rel="noopener noreferrer">{t("read")}</a>}
+                  {p.code && <a className="btn btn-ghost min-h-10 px-4 text-sm" href={p.code} target="_blank" rel="noopener noreferrer">Code</a>}
                 </div>
               </li>
             ))}
@@ -102,7 +104,6 @@ export default async function Research({ params }: { params: Promise<{ locale: s
                 <dl className="mt-4 grid grid-cols-2 gap-4">
                   <div><dt className="text-sm text-[var(--muted)]">Original photos</dt><dd className="num display text-3xl">{d.originals}</dd></div>
                   <div><dt className="text-sm text-[var(--muted)]">Images incl. variants</dt><dd className="num display text-3xl">{d.images.toLocaleString("en-IN")}</dd></div>
-                  {d.downloads && <div><dt className="text-sm text-[var(--muted)]">Downloads</dt><dd className="num display text-3xl">{d.downloads.toLocaleString("en-IN")}</dd></div>}
                   <div><dt className="text-sm text-[var(--muted)]">Collected in</dt><dd>{d.where}</dd></div>
                 </dl>
                 <p className="mt-4 text-sm text-[var(--muted)]">{d.host} · DOI <a className="link" href={d.url} target="_blank" rel="noopener noreferrer">{d.doi}</a> · {d.license}</p>
@@ -118,6 +119,8 @@ export default async function Research({ params }: { params: Promise<{ locale: s
             <p className="num display mt-6 text-[3.4rem] leading-none text-[var(--color-leaf)]">{RESEARCH.patent.number}</p>
             <p className="title mt-4 text-xl prose-measure">{RESEARCH.patent.title}</p>
             <p className="mt-2 text-[var(--muted)]">{RESEARCH.patent.office} · {RESEARCH.patent.klass} · registered {RESEARCH.patent.filed}, certified {RESEARCH.patent.certified}</p>
+            <p className="mt-4"><a className="btn btn-ghost min-h-10 px-4 text-sm" href={RESEARCH.patent.verifyUrl} target="_blank" rel="noopener noreferrer">Verify on IP India</a></p>
+            <p className="mt-2 text-sm text-[var(--muted)]">On the Government of India public design search, enter design number {RESEARCH.patent.number}.</p>
           </div>
           <div aria-labelledby="press">
             <h2 id="press" className="display t-h2">{t("press")}</h2>

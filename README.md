@@ -40,7 +40,7 @@ Every number comes from leaves the model never saw during training. Many plant d
 | Test accuracy (217 unseen leaves, 6 classes) | **94.9%** (95% bootstrap CI 91.7–97.7%) |
 | Macro-F1 | 0.942 |
 | Calibration error (ECE, after temperature scaling) | 1.8% |
-| "Not a leaf" detection | AUROC 0.993; rejects 90% of non-leaf images and keeps 98.6% of real ones |
+| "Not a leaf" detection | AUROC 0.993; rejects 89.5% of 172 non-leaf test images and keeps 98.6% of real leaves |
 | Browser model vs. PyTorch | identical test accuracy; max output difference 4.5 × 10⁻⁵ |
 | Speed | about 120 ms per photo on a laptop CPU, in the browser |
 
@@ -95,9 +95,10 @@ Every number comes from leaves the model never saw during training. Many plant d
 
 ## Research behind it
 
-- **Paper:** *A Hybrid Deep Learning Approach for Automated Plant Disease Diagnosis in Indian Ridge Gourd: Dataset Creation and Real-World Application*. MIND 2025, MNIT Jaipur; Springer *Communications in Computer and Information Science* (CCIS 2980–2981), 2026. Built a 600-photo field dataset from farms near Jaipur and reached 92.0% with a DenseNet121 + XGBoost hybrid.
+- **Paper:** [*A Hybrid Deep Learning Approach for Automated Plant Disease Diagnosis in Indian Ridge Gourd: Dataset Creation and Real-World Application*](https://doi.org/10.1007/978-3-032-31233-4_7). MIND 2025, MNIT Jaipur; Springer *Communications in Computer and Information Science*, vol. 2980, pp. 83–94, 2026. Built a 600-photo field dataset from farms near Jaipur and reached 92.0% with a DenseNet121 + XGBoost hybrid.
 - **Review:** [*A comprehensive review and bibliometric analysis of deep learning applications in plant disease detection*](https://doi.org/10.1007/s44163-026-02310-z). *Discover Artificial Intelligence* 6, 1459 (Springer Nature, 2026, open access).
 - **Datasets:** ridge gourd leaf dataset on [IEEE DataPort](https://doi.org/10.21227/469z-vm04) and brinjal leaf dataset on [Mendeley Data](https://doi.org/10.17632/c39p3k87g2.1).
+- **Registered design:** No. 476293-001, Government of India (Designs Act 2000, class 14-02): an IoT device for real-time data collection and augmentation of plant samples. Verifiable on the [IP India public design search](https://search.ipindia.gov.in/designsearch).
 - **Design registration:** Government of India design no. 476293-001 for the field data-collection device.
 - **Press:** the ridge gourd work was covered by *Punjab Kesari*.
 
