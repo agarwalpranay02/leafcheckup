@@ -1,6 +1,27 @@
 version: 2
+# Grouped minor and patch updates, once a month. Major upgrades are done by hand,
+# because they usually need code changes (Next.js, ESLint, onnxruntime).
 updates:
-  - { package-ecosystem: npm, directory: /apps/web, schedule: { interval: weekly }, open-pull-requests-limit: 10, groups: { minor: { update-types: [minor, patch] } } }
-  - { package-ecosystem: pip, directory: /services/inference, schedule: { interval: weekly } }
-  - { package-ecosystem: docker, directory: /apps/web, schedule: { interval: weekly } }
-  - { package-ecosystem: github-actions, directory: /, schedule: { interval: weekly } }
+  - package-ecosystem: npm
+    directory: /apps/web
+    schedule: { interval: monthly }
+    open-pull-requests-limit: 3
+    groups:
+      web: { update-types: [minor, patch] }
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+  - package-ecosystem: pip
+    directory: /services/inference
+    schedule: { interval: monthly }
+    open-pull-requests-limit: 2
+    groups:
+      inference: { update-types: [minor, patch] }
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: monthly }
+    groups:
+      actions: { patterns: ["*"] }
