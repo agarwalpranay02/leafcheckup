@@ -314,9 +314,7 @@
     "leakfree": "Split by source leaf (LeafCheckup)",
     "model": "Model",
     "acc": "Accuracy",
-    "f1": "Macro F1",
-    "dataQuality": "Data quality fixes",
-    "dataQualityBody": "Building the leaf-level split surfaced {conflicts} photos filed under two different labels and {dups} near-duplicate shots. Conflicting photos were excluded; duplicates were kept in the same split."
+    "f1": "Macro F1"
   },
   "dev": {
     "title": "LeafCheckup API",

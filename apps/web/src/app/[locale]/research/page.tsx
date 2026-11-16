@@ -62,16 +62,7 @@ export default async function Research({ params }: { params: Promise<{ locale: s
               </tbody>
             </table>
           </div>
-          <p className="mt-3 text-sm text-[var(--muted)]">LeafCheckup: {f.testImages} held-out leaves, 95% bootstrap interval {pct(f.ci[0])}–{pct(f.ci[1])}. Ridge-gourd-only rows use the ridge gourd test leaves. <Link className="link" href="/research/model-card">{t("modelCard")}</Link></p>
-          {f.split && (
-            <div className="mt-8 rounded-3xl bg-[var(--color-bloom-soft)] p-6 text-[var(--color-ink)]">
-              <h3 className="title text-xl">{t("dataQuality")}</h3>
-              <p className="mt-2 prose-measure">{t("dataQualityBody", { conflicts: f.split.label_conflicts_removed.length * 2, dups: f.split.near_duplicates_merged })}</p>
-              <ul className="mt-3 grid gap-1 font-mono text-sm sm:grid-cols-2">
-                {f.split.label_conflicts_removed.map(([a, b]) => <li key={a}>{a} ≡ {b}</li>)}
-              </ul>
-            </div>
-          )}
+          <p className="mt-3 text-sm text-[var(--muted)]">LeafCheckup: {f.testImages} held-out leaves, 95% bootstrap interval {pct(f.ci[0])}–{pct(f.ci[1])}. Ridge-gourd-only rows use the ridge gourd test leaves.{f.split && ` Before training, ${f.split.label_conflicts_removed.length * 2} photos filed under two different labels were removed and near-duplicate shots were kept on the same side of the split.`} <Link className="link" href="/research/model-card">{t("modelCard")}</Link></p>
         </section>
 
         {/* Papers */}

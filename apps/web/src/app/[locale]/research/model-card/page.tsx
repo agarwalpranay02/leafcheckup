@@ -31,7 +31,22 @@ export default async function ModelCard({ params }: { params: Promise<{ locale: 
           <Row k="Task" v={`Single-leaf image classification into ${CONDITIONS.length} classes across ${CROP_IDS.length} crops: ${COVERAGE.coverageDetail} Images that do not look like these leaves are rejected.`} />
           <Row k="Architecture" v="EfficientNet-B0 (ImageNet pre-trained, timm), fine-tuned end-to-end at 224×224. Classifier head applied in the client so a class activation map can be computed from the same features." />
           <Row k="Training data" v="Original field photographs only: 600 ridge gourd leaves (IEEE DataPort 10.21227/469z-vm04) and 850 brinjal leaves (Mendeley Data 10.17632/c39p3k87g2.1), captured with smartphones on farms in Rajasthan. The published offline variants (thresholding, edge maps, etc.) were not used; online augmentation (crops, flips, rotation, colour jitter, blur, random erasing) was used instead." />
-          <Row k="Split" v={`70/15/15 stratified group split by source leaf. ${f.split?.near_duplicates_merged ?? 0} near-duplicate photos (perceptual hash) were grouped; ${(f.split?.label_conflicts_removed.length ?? 0) * 2} photos that appeared under two different labels were removed.`} />
+          <Row
+            k="Split"
+            v={
+              <>
+                {`70/15/15 stratified group split by source leaf. ${f.split?.near_duplicates_merged ?? 0} near-duplicate photos (perceptual hash) were grouped; ${(f.split?.label_conflicts_removed.length ?? 0) * 2} photos that appeared under two different labels were removed.`}
+                {f.split && f.split.label_conflicts_removed.length > 0 && (
+                  <details className="mt-2 text-sm">
+                    <summary className="cursor-pointer text-[var(--muted)]">Photos removed for conflicting labels</summary>
+                    <ul className="mt-2 grid gap-1 font-mono">
+                      {f.split.label_conflicts_removed.map(([a, b]) => <li key={a} className="break-all">{a} = {b}</li>)}
+                    </ul>
+                  </details>
+                )}
+              </>
+            }
+          />
           <Row k="Test accuracy" v={`${pct(f.testAccuracy)} (95% bootstrap CI ${pct(f.ci[0])}–${pct(f.ci[1])}) on ${f.testImages} held-out leaves, with horizontal-flip test-time augmentation.`} />
           <Row k="Macro F1" v={f.macroF1.toFixed(3)} />
           <Row k="Calibration" v={`Temperature scaling fitted on validation. Expected calibration error on test: ${pct(Number(ev.test_ece_calibrated))}. Displayed confidence can be read as a probability.`} />
