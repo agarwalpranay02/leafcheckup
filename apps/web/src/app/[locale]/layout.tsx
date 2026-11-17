@@ -7,6 +7,7 @@ import type { ReactNode } from "react";
 import { routing } from "@/i18n/routing";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { Analytics } from "@vercel/analytics/next";
 import { ServiceWorker } from "@/components/ServiceWorker";
 import { MobileTabBar } from "@/components/MobileTabBar";
 import { Toaster } from "@/components/Toaster";
@@ -103,6 +104,8 @@ export default async function LocaleLayout({ children, params }: { children: Rea
           <Toaster />
           <ServiceWorker />
         </NextIntlClientProvider>
+        {/* Page-view counts only, without cookies; only on Vercel, where /_vercel/insights exists */}
+        {process.env.VERCEL ? <Analytics /> : null}
       </body>
     </html>
   );

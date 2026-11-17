@@ -7,7 +7,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { SITE } from "@/lib/site";
 import { share } from "@/lib/seo";
 
-const UPDATED = "16 November 2026";
+const UPDATED = "17 November 2026";
 
 const P = ({ children }: { children: ReactNode }) => <p className="mt-3 text-[var(--muted)] prose-measure">{children}</p>;
 const H = ({ children }: { children: ReactNode }) => <h2 className="title mt-10 text-2xl">{children}</h2>;
@@ -32,15 +32,16 @@ const DOCS: Record<string, { title: string; body: ReactNode }> = {
           "Rate limiting: a salted hash of your IP address, kept briefly in memory or in our cache provider.",
           "Weather risk: if you use it, your browser sends the coordinates or place name directly to Open-Meteo to fetch the forecast. We do not receive them.",
           "Security reports: browsers may send us Content-Security-Policy violation reports, which contain the page URL.",
+          "Visit counts: Vercel Web Analytics, our host's privacy-friendly analytics, counts page views without cookies. It records the page, referrer, country, browser, operating system and device type; visitors are told apart only by a hash that is discarded after a day. Leaf photos are never included.",
         ]} />
         <H>What we don&apos;t do</H>
-        <UL items={["No advertising, no ad trackers, no selling or sharing of personal data.", "No third-party analytics scripts on the site.", "Photos are not used to train models unless you explicitly choose to contribute them in a future opt-in feature."]} />
+        <UL items={["No advertising, no ad trackers, no selling or sharing of personal data.", "No cross-site tracking: visit counts stay with our host and are never combined with other sites.", "Photos are not used to train models unless you explicitly choose to contribute them in a future opt-in feature."]} />
         <H>Cookies</H>
-        <P>Only essential cookies: a session cookie when you sign in, and a language preference. No consent banner is needed because nothing non-essential is set.</P>
+        <P>Only essential cookies: a session cookie when you sign in, and a language preference. Visit counting uses no cookies, so no consent banner is needed because nothing non-essential is set.</P>
         <H>Retention and your rights</H>
         <P>Account data is kept while your account is active and deleted within 30 days of a deletion request; contact messages are kept for up to two years. You can ask to access, correct or erase your data, withdraw consent, or nominate someone to act for you, by writing to {SITE.email}. We reply within 30 days. If you are not satisfied, you may complain to the Data Protection Board of India.</P>
         <H>Processors</H>
-        <P>Hosting and database, Resend (email), Google (optional sign-in) and Cloudflare (network security). Each processes data only to provide its service to us.</P>
+        <P>Vercel (hosting and visit counts), our database provider, Resend (email), Google (optional sign-in) and Cloudflare (network security). Each processes data only to provide its service to us.</P>
       </>
     ),
   },
